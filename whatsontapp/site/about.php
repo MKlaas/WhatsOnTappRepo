@@ -52,6 +52,7 @@ include('navbar.php');
                 <h1 class="page-header">Bar Page
                     <small>(bar name)</small>
                 </h1>
+				<p>TESTING GIT</p>
 				<!--
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a>
