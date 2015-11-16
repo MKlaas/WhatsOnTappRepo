@@ -49,7 +49,7 @@ include('navbar.php');
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Bar Page TESTING
+                <h1 class="page-header">Bar Page
                     <small>(bar name)</small>
                 </h1>
 				<!--
