@@ -4,27 +4,26 @@ include('login.php'); // Includes Login Script
 if(isset($_SESSION['login_user'])){
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
 
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap Login Form Template</title>
+                              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                                                                                   <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome To What's on Tapp!</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/form-elements.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+                    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+                         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+                              <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		                 <link rel="stylesheet" href="assets/css/form-elements.css">
+                    <link rel="stylesheet" href="assets/css/style.css">
+		<!-- End Css -->
+                        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+                             <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                        <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -35,8 +34,7 @@ if(isset($_SESSION['login_user'])){
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-    </head>
+ </head>
 
     <body>
 
@@ -47,7 +45,7 @@ if(isset($_SESSION['login_user'])){
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>What's on Tapp</strong></h1>
+                            <h1><strong>What's on Tapp!</strong></h1>
                             <div class="description">
                             </div>
                         </div>
@@ -67,20 +65,22 @@ if(isset($_SESSION['login_user'])){
 			                    <form role="form" action="" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
-			                        	<!--<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username" >-->
-										<input id="name" name="username" placeholder="username" type="text">
-			                        </div>
+										<!-- Change PHP code to work with the ID "Form-username"-->
+			                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username" >
+										<!-- Change PHP code to work with the ID "Form-username"-->
+				                   </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<!--<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" ></div>-->
-										<input id="password" name="password" placeholder="**********" type="password">
+										<!-- Change PHP code to work with the ID "Form-password"-->
+			                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" ></div>
+										<!-- Change PHP code to work with the ID "Form-password"-->
 									</div>
 <br>
 
 
 
 			                      <!--  <button type="submit" class="btn" onclick="window.location='http://www.uc.edu'">Sign in!</button>-->
-			                    <input name="submit" type="submit" value=" Login ">
+			                    <button name="submit" type="submit" class="btn" value=" Login ">Login</button>
 								<span><?php echo $error; ?></span>
 </form>
 		                    </div>
@@ -96,20 +96,25 @@ if(isset($_SESSION['login_user'])){
                     </div>
                 </div>
             </div>
+			
+			
+<!--Do Not Touch nothing Below this line-->
+<audio autoplay hidden>
+<source src="./sounds/Beer Sound Effect In High Qualty.mp3" type="audio/mpeg">
+</audio>
+ </div>
+<!-- Do Not touch Nothing above this line-->
 
-        </div>
 
+<!-- Javascript -->
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+<!--[if lt IE 10]>
+<script src="assets/js/placeholder.js"></script>
+![endif]-->
 
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
-
-    </body>
+</body>
 
 </html>
