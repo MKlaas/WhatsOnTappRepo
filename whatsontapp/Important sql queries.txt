@@ -1,0 +1,6 @@
+// clean up duplicates
+
+SELECT name, COUNT(*) c FROM dbtablebeer GROUP BY name HAVING c > 1
+
+// delete duplicate values, DO NOT DO THIS ON MASTER DATABSE CHANCE TO DELETE ALL ROWS!!!
+DELETE n1 FROM dbtablebeer n1, dbtablebeer n2 WHERE n1.id < n2.id AND n1.name = n2.name

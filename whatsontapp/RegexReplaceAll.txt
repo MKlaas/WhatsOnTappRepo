@@ -1,0 +1,49 @@
+REGEX TO REMOVE URLS AND CLEAN UP BEER FILES FOR DATABASE ENTRY
+
+"http://www.beeradvocate.com/.*?,
+
+"",
+
+/
+
+%
+
+ABV".*
+replace with "
+
+
+
+// this will change based on beer type, the goal is to get rid of the column
+// between beer style and abv ** also watch out for beers with the same name as the style
+"American Stout",.*?,
+replace with "American Stout",
+
+
+
+
+// not needed atm
+// adds to start
+^ 
+replace with NULL, NULL, NULL, 
+
+// adds to end
+$
+replace with , NULL, NULL
+
+
+column names Name,BreweryName,Style,ABV
+
+
+/// for bars entries
+<img.*?</a>[\r\n]*. 
+<wp:post_name>[^<>]+</wp:post_name>
+
+// remove all type tags and text
+<type>[^<>]+</type>
+// remove all black lines
+^\s*
+
+
+// make sure matches new line is checked: this will remove everything between the two tags, inclusive
+<geometry>[\r\n].*?</place_id>[\r\n]*
+
