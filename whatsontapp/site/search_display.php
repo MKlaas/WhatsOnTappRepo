@@ -1,10 +1,9 @@
 
 <?php
-include('navbar.php'); 
-include('login\profile.php'); 
-?>
-<?php
-session_start(); // Starting Session
+error_reporting(E_ERROR | E_PARSE);
+include('includes\navbar.php'); 
+include('account\profile.php'); 
+
 $error=''; // Variable To Store Error Message
 if (isset($_POST['submit'])) {
 if (empty($_POST['name'])) {
@@ -17,15 +16,14 @@ $name=$_POST['name'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
 $connection = mysql_connect("localhost", "root", "admin");
 
-
 // Selecting Database
 $db = mysql_select_db("brew_view", $connection);
 // SQL query to fetch information of beer types and finds matches.
 $query="SELECT BeerID, Name, Style FROM dbtablebeer WHERE Name LIKE '%" . $name .  "%' OR Style LIKE '%" . $name ."%'";
-$rows = mysql_num_rows($query);
+$result = mysql_query($query);  
+$rows = mysql_num_rows($result);
 
-  //-run  the query against the mysql query function
-  $result=mysql_query($query);
+
   //-create  while loop and loop through result set
   while($row=mysql_fetch_array($result)){
           $Name  =$row['Name'];
@@ -38,6 +36,6 @@ $rows = mysql_num_rows($query);
   }
   }
   }
-  mysql_close($connection); // Closing Connection
+  mysql_close(); // Closing Connection
   
 ?>
