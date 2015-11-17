@@ -28,7 +28,7 @@
     <![endif]-->
 	<div style="float:right; padding-right:20px;">
 <?php
-include('login\profile.php'); 
+include('account\profile.php'); 
 ?>
 </div>
 </head>
@@ -36,10 +36,10 @@ include('login\profile.php');
 <body>
 
 
-   <?php
-include('navbar.php'); 
-
+  <?php
+include('includes\navbar.php'); 
 ?>
+
 
     <!-- Page Content -->
     <div class="container">
@@ -52,7 +52,6 @@ include('navbar.php');
                 <h1 class="page-header">Bar Page
                     <small>(bar name)</small>
                 </h1>
-				<p>TESTING GIT</p>
 				<!--
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a>

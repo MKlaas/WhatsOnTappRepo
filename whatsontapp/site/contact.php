@@ -34,11 +34,11 @@
 <body>
 <div style="float:right; padding-right:20px;">
 <?php
-include('login\profile.php'); 
+include('account\profile.php'); 
 ?>
 </div>
   <?php
-include('navbar.php'); 
+include('includes\navbar.php'); 
 ?>
 
     <!-- Page Content -->

@@ -2,7 +2,7 @@
 <html lang="en">
 <div style="float:right; padding-right:20px;">
 <?php
-include('login\profile.php'); 
+include('account\profile.php'); 
 ?>
 </div>
 <br/>
@@ -38,9 +38,10 @@ include('login\profile.php');
 </head>
 <br>
 
-<?php
-include('navbar.php'); 
+  <?php
+include('includes\navbar.php'); 
 ?>
+
 
 
     <!-- Header Carousel -->
