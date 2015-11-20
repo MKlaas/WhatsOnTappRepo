@@ -15,7 +15,7 @@ include('core\init_profile.php');
 
 <b>Go to index </b><a href="../index.php">Go To Main Page</a> <br/>
 
-<b id="update"><a href="update.php">Update Info</a></b><br/>
+<b id="update"><a href="/whatsontapprepo/whatsontapp/site/account/update.php">Update Info</a></b><br/>
 <b id="logout"><a href="/whatsontapprepo/whatsontapp/site/account/logout.php">Log Out</a></b>
 
 
