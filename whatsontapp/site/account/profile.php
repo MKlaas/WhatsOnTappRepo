@@ -9,7 +9,9 @@ include('core\init_profile.php');
 </head>
 <body>
 <div id="profile">
-<b id="welcome">Welcome : <i><?php echo $login_session; ?></i></b> <br/>
+
+<b id="welcome">Welcome! <i><?php echo $login_session; ?></i></b> <br/>
+
 
 <b>Go to index </b><a href="../index.php">Go To Main Page</a> <br/>
 

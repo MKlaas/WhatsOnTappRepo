@@ -91,7 +91,8 @@ if(isset($_SESSION['login_user'])){
                         	<p>OR!<p>
 <p> New to our Site? Register NOW!</p>
 <br>
-		<button type="submit" class="btn" onclick="window.location='register/register.php'">Register!</button>
+		<button type="submit" class="btn"  onclick="window.location='register/register.php'">Register!</button>
+		
                         </div>
                     </div>
                 </div>
