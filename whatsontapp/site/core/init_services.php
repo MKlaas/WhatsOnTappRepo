@@ -38,13 +38,13 @@ $barName=array();
           $barName[]=$row['Name'];
 		  
   }
-
+$divid = 1;
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);
 echo '<div class="row"> ';
 foreach ($xml->result as $result)
 {
-	echo '<div class="col-md-4 text-center" style="height:350px; width:350px;">
+	echo '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
             <div class="thumbnail"> <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
                   <span class="fa-stack fa-5x">
                               <i class="fa fa-beer fa-stack-2x text-primary"></i>
