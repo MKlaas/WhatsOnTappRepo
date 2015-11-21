@@ -41,32 +41,43 @@ $barName=array();
 $divid = 1;
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);
+
 echo '<div class="row"> ';
 foreach ($xml->result as $result)
 {
-	echo '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
-            <div class="thumbnail"> <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
+	$photo=$result->photo;
+	$photo_reference = $result->photo->photo_reference;
+	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+
+	echo isset($photo_reference) ? '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
+            <div class="thumbnail"> <image src="'. $image .'"</image>
+                  <div class="caption">' 
+				  : 	  
+			'<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
+				<div class="thumbnail"> <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
                   <span class="fa-stack fa-5x">
-                              <i class="fa fa-beer fa-stack-2x text-primary"></i>
-                              <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
-                        </span>
-                  <div class="caption">';
+					  <i class="fa fa-beer fa-stack-2x text-primary"></i>
+					  <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
+                    </span>
+                  <div class="caption">' ;
 
 	if(in_array($result->name, $barName))
 	{
-	   echo "<h4><a href=''>" . $result->name . "</a></h4>";
+		echo isset($result->name) ? "<h4><a href=''>" . $result->name . "</a></h4>" : "-<br/>";
 	}
 	
 	else 
 	{
-	echo "<div style='float:right; font-size:200%;'><a href='addbar.php'>+</a></div>";
-    echo "<h4>" . $result->name . "</h4>";
+		echo "<div style='float:right; font-size:200%;'><a href='addbar.php'>+</a></div>";
+		echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
 	
 	}
 	
-	echo "<small >" . $result->formatted_address . "</small> <br>";
-	echo "<small> Rating:" . $result->rating . "</small><br>";
-	echo "<small>Price Level:" . $result->price_level . "</small>";
+	echo isset($result->formatted_address) ? "<small>" . $result->formatted_address . "</small><br/>" : "-<br/>";
+	echo isset($result->rating) ? "<small> Rating:" . $result->rating . "</small><br/>" : "-<br/>" ;
+	echo isset($result->price_level) ? "<small>Price Level:" . $result->price_level . "</small><br/>" : "-<br/>" ;
+	
+	
 	echo ' 		 </div>
 			  </div>
 		   </div> ';
