@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<div style="float:right; padding-right:20px;">
+<div style="height:45px; width: 100%;background-color: black;">
 <?php
 include('account\profile.php'); 
 ?>
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
+
+
 <head>
 
     <meta charset="utf-8">
