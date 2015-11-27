@@ -1,5 +1,5 @@
 <?php
-include('core\init_profile.php'); 
+include('core/init_profile.php'); 
 ?>
 <!DOCTYPE html>
 <html >

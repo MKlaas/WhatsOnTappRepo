@@ -1,8 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <div style="height:45px; width: 100%;background-color: black;">
 <?php
-include('account\profile.php'); 
+include('account/profile.php'); 
 ?>
 </div>
 
@@ -37,7 +38,7 @@ include('account\profile.php');
 <br>
 
   <?php
-include('includes\navbar.php'); 
+include('includes/navbar.php'); 
 ?>
 
 

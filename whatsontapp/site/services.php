@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,16 +27,17 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<div style="float:right; padding-right:20px;">
+<div style="height:45px; width: 100%;background-color: black;">
 <?php
-include('account\profile.php'); 
+include('account/profile.php'); 
 ?>
+</div>
 </div>
 </head>
 
 <body>
   <?php
-include('includes\navbar.php'); 
+include('includes/navbar.php'); 
 ?>
 
 
@@ -85,7 +87,7 @@ include('includes\navbar.php');
         <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
 
 <?php
-include('core\init_services.php'); 
+include('core/init_services.php'); 
 ?>
  
 
