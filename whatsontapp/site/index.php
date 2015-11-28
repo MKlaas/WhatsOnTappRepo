@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <div style="height:45px; width: 100%;background-color: black;">
-<?php
-include('includes/navbar_profile.php'); 
-?>
+    <?php
+    include('includes/navbar_profile.php'); 
+    ?>
 </div>
 
 
@@ -32,14 +32,14 @@ include('includes/navbar_profile.php');
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <![endif]-->
 
-</head>
-<br>
+    </head>
+    <br>
 
-  <?php
-include('includes/navbar.php'); 
-?>
+    <?php
+    include('includes/navbar.php'); 
+    ?>
 
 
 

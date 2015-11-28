@@ -36,7 +36,7 @@ include('includes/navbar_profile.php');
 </head>
 
 <body>
-  <?php
+<?php
 include('includes/navbar.php'); 
 ?>
 
