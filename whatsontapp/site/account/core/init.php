@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Starting Session
 $error=''; // Variable To Store Error Message
 if (isset($_POST['submit'])) {
@@ -22,7 +21,7 @@ $query = mysql_query("select * from dbtableuser where Password='$password' AND U
 $rows = mysql_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
-header("location: profile.php"); // Redirecting To Other Page
+header("location: ../index.php"); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
 }

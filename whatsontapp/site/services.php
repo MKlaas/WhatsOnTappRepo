@@ -29,7 +29,7 @@
     <![endif]-->
 <div style="height:45px; width: 100%;background-color: black;">
 <?php
-include('account/profile.php'); 
+include('includes/navbar_profile.php'); 
 ?>
 </div>
 </div>
