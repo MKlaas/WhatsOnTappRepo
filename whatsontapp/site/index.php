@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<div style="height:45px; width: 100%;background-color: black;">
-    <?php
-    include('includes/navbar_profile.php'); 
-    ?>
-</div>
+
 
 
 <head>

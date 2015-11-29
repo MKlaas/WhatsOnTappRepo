@@ -1,4 +1,7 @@
 <body style="background-image:url('http://shutterstock.7eer.net/c/39150/43068/1305?u=http%3A%2F%2F');">
+<?php
+include('C:\documents\htdocs\WhatsOnTappRepo\whatsontapp\site\account\core\init_profile.php'); 
+?>
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
