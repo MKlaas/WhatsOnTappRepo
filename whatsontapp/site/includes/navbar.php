@@ -1,7 +1,8 @@
-<body style="background-image:url('http://shutterstock.7eer.net/c/39150/43068/1305?u=http%3A%2F%2F');">
 <?php
-include('/../account/core/init_profile.php'); 
+include('./account/core/init_profile.php'); 
 ?>
+
+<body style="background-image:url('http://shutterstock.7eer.net/c/39150/43068/1305?u=http%3A%2F%2F');">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
