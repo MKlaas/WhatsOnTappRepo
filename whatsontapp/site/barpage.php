@@ -26,11 +26,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<div style="height:45px; width: 100%;background-color: black;">
-<?php
-include('includes/navbar_profile.php'); 
-?>
-</div>
+
 </head>
 
 <body>
@@ -148,7 +144,7 @@ include('includes/navbar.php');
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; What's on Tapp! 2015</p>
                 </div>
             </div>
         </footer>
