@@ -24,7 +24,11 @@
    </p>
 
    <input type="submit" value="Add Bar">
+
  </form>
+ <form action="http://localhost/whatsontapprepo/whatsontapp/site/services.php">
+  <input type="submit" value="Go Back">
+</form>
 </body>
 </html>  
 <?php
@@ -40,7 +44,7 @@ $conn = new mysqli($servername, $dbrootname, $dbpassword);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully"; 
+//echo "Connected successfully"; 
 
 
 if (!$link = mysql_connect($servername, $dbrootname, $dbpassword)) {
@@ -75,20 +79,20 @@ $city = $searchTextFieldArray[2];
 $state = $searchTextFieldArray[3];
 $country = $searchTextFieldArray[4];
 
- $sql = "INSERT INTO dbtablebar (name, address, city, state, country) 
-   VALUES ('$name', '$address', '$city', '$state', '$country')";
-    
+$sql = "INSERT INTO dbtablebar (name, address, city, state, country) 
+VALUES ('$name', '$address', '$city', '$state', '$country')";
+
 mysql_select_db('dbname');
 $retval = mysql_query( $sql, $link );
 
 if(! $retval )
 {
-  
-  die('Could not enter data: ' . mysql_error());
-  
+
+//  die('Could not enter data: ' . mysql_error());
+
 }
 
-echo "Entered data successfully\n";
+//echo "Entered data successfully\n";
 
 
 // Close connection

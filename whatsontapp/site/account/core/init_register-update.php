@@ -47,7 +47,7 @@ $password = $_POST['password'];
       die('Something Went Wrong: ' . mysql_error());
    }
    
-   echo "Thanks For Registering \n";
+   echo "Thanks For Registering \n <br/> You may now <a href='http://localhost/whatsontapprepo/whatsontapp/site/account/login.php'>Login</a>";
    
  
 // Close connection

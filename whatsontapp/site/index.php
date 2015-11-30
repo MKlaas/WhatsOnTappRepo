@@ -131,7 +131,7 @@
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Other Increditable Choices</h2>
+                <h2 class="page-header">Other Incredible Choices</h2>
             </div>
             <div class="col-md-4 col-sm-6">
                 <a href="portfolio-item.html">
