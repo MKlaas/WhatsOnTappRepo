@@ -20,10 +20,13 @@
     <p>
      <label for="searchTextField">Please insert an address:</label>
      <input id="searchTextField" name="searchTextField" type="text" size="150">
-
+   </p>
+   <p>
+     <label for="beerTextField">What beer did you have/see?</label> <br/>
+     <input id="beerTextField" name="beerTextField" type="text" size="50">
    </p>
 
-   <input type="submit" value="Add Bar">
+   <input type="submit" value="Add">
 
  </form>
  <form action="http://localhost/whatsontapprepo/whatsontapp/site/services.php">
@@ -65,30 +68,55 @@ if (!mysql_select_db($dbname, $link)) {
 $searchTextField = $_POST['searchTextField'];
 $searchTextFieldArray = explode(',', $searchTextField);
 
-/*
-$name = $_POST['name'];
-$address = $_POST['address'];
-$city = $_POST['city'];
-$state = $_POST['state'];
-$zipcode = $_POST['zipcode'];
-$phoneNumber = $_POST['phoneNumber'];
-*/
-$name = $searchTextFieldArray[0];
-$address = $searchTextFieldArray[1];
-$city = $searchTextFieldArray[2];
-$state = $searchTextFieldArray[3];
-$country = $searchTextFieldArray[4];
+$beerTextField = $_POST['beerTextField'];
+// bar info
+$name = mysql_real_escape_string($searchTextFieldArray[0]);
+$address = mysql_real_escape_string($searchTextFieldArray[1]);
+$city = mysql_real_escape_string($searchTextFieldArray[2]);
+$state = mysql_real_escape_string($searchTextFieldArray[3]);
+$country = mysql_real_escape_string($searchTextFieldArray[4]);
 
-$sql = "INSERT INTO dbtablebar (name, address, city, state, country) 
+// beer info
+$beername= mysql_real_escape_string($beerTextField);
+$breweryName = mysql_real_escape_string(null);
+$style = mysql_real_escape_string(null);
+$abv = mysql_real_escape_string(null);
+$price = mysql_real_escape_string(null);
+// barbeer info
+//$beerID = mysql_real_escape_string($searchTextFieldArray[0]);;
+//$barID = mysql_real_escape_string($searchTextFieldArray[0]);;
+
+$sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country) 
 VALUES ('$name', '$address', '$city', '$state', '$country')";
-
+$sql_beer = "INSERT INTO 'dbtablebeer' ('Name', 'BreweryName', 'Style', 'ABV') 
+VALUES ('$beerName', '$breweryName', '$style', '$abv', $price)";
+/*
+$sql_barbeer = "INSERT INTO 'dbtablebarbeer' ('BeerID', 'BarID') 
+VALUES ('$beerID', '$barID')";
+*/
 mysql_select_db('dbname');
-$retval = mysql_query( $sql, $link );
+$bar_retval = mysql_query( $sql_bar, $link );
+$beer_retval = mysql_query( $sql_beer, $link );
+$barbeer_retval = mysql_query( $sql_barbeer, $link );
 
 if(! $retval )
 {
 
-//  die('Could not enter data: ' . mysql_error());
+  die('Could not enter bar data: ' . mysql_error());
+
+}
+
+if(! $beer_retval )
+{
+
+  die('Could not enter beer data: ' . mysql_error());
+
+}
+
+if(! $barbeer_retval )
+{
+
+  die('Could not enter barbeer data: ' . mysql_error());
 
 }
 

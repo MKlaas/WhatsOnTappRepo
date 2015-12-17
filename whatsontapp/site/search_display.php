@@ -31,7 +31,7 @@ $rows = mysql_num_rows($result);
           $BeerID=$row['BeerID'];
   //-display the result of the array
   echo "<ul>\n";
-  echo "<li>" . "<a  href=\"search.php?id=$BeerID\">"   .$Name . " " . $Style .  "</a></li>\n";
+  echo "<li>" . "<a  href=\"beerpage.php?id=$BeerID\">"   .$Name . " " . $Style .  "</a></li>\n";
   echo "</ul>";
   }
   }

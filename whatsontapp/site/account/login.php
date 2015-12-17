@@ -100,10 +100,12 @@ if(isset($_SESSION['login_user'])){
 			
 			
 <!--Do Not Touch nothing Below this line-->
+<!--
 <audio autoplay hidden>
 <source src="./sounds/Beer Sound Effect In High Qualty.mp3" type="audio/mpeg">
 </audio>
  </div>
+ --?
 <!-- Do Not touch Nothing above this line-->
 
 
