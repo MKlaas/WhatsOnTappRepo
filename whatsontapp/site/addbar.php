@@ -25,6 +25,22 @@
      <label for="beerTextField">What beer did you have/see?</label> <br/>
      <input id="beerTextField" name="beerTextField" type="text" size="50">
    </p>
+   <p>
+     <label for="priceTextField">What price was the beer?</label> <br/>
+     <input id="priceTextField" name="priceTextField" type="text" size="50">
+   </p>
+   <p>
+     <label for="styleTextField">What style was it?</label> <br/>
+     <input id="styleTextField" name="styleTextField" type="text" size="50">
+   </p>
+   <p>
+     <label for="abvTextField">What abv was it?</label> <br/>
+     <input id="abvTextField" name="abvTextField" type="text" size="50">
+   </p>
+   <p>
+     <label for="breweryTextField">Do you know the brewery?</label> <br/>
+     <input id="breweryTextField" name="breweryTextField" type="text" size="50">
+   </p>
 
    <input type="submit" value="Add">
 
@@ -69,6 +85,11 @@ $searchTextField = $_POST['searchTextField'];
 $searchTextFieldArray = explode(',', $searchTextField);
 
 $beerTextField = $_POST['beerTextField'];
+$breweryTextField = $_POST['breweryTextField'];
+$styleTextField = $_POST['styleTextField'];
+$abvTextField = $_POST['abvTextField'];
+$priceTextField = $_POST['priceTextField'];
+
 // bar info
 $name = mysql_real_escape_string($searchTextFieldArray[0]);
 $address = mysql_real_escape_string($searchTextFieldArray[1]);
@@ -77,50 +98,53 @@ $state = mysql_real_escape_string($searchTextFieldArray[3]);
 $country = mysql_real_escape_string($searchTextFieldArray[4]);
 
 // beer info
-$beername= mysql_real_escape_string($beerTextField);
-$breweryName = mysql_real_escape_string(null);
-$style = mysql_real_escape_string(null);
-$abv = mysql_real_escape_string(null);
-$price = mysql_real_escape_string(null);
-// barbeer info
-//$beerID = mysql_real_escape_string($searchTextFieldArray[0]);;
-//$barID = mysql_real_escape_string($searchTextFieldArray[0]);;
+$beerName= mysql_real_escape_string($beerTextField);
+$breweryName = mysql_real_escape_string($breweryTextField);
+$style = mysql_real_escape_string($styleTextField);
+$abv = mysql_real_escape_string($abvTextField);
+$price = mysql_real_escape_string($priceTextField);
+
+
+mysql_select_db('dbname');
 
 $sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country) 
 VALUES ('$name', '$address', '$city', '$state', '$country')";
-$sql_beer = "INSERT INTO 'dbtablebeer' ('Name', 'BreweryName', 'Style', 'ABV') 
-VALUES ('$beerName', '$breweryName', '$style', '$abv', $price)";
-/*
-$sql_barbeer = "INSERT INTO 'dbtablebarbeer' ('BeerID', 'BarID') 
-VALUES ('$beerID', '$barID')";
-*/
-mysql_select_db('dbname');
-$bar_retval = mysql_query( $sql_bar, $link );
-$beer_retval = mysql_query( $sql_beer, $link );
-$barbeer_retval = mysql_query( $sql_barbeer, $link );
+$retval_bar = mysql_query( $sql_bar, $link );
+$barID = mysql_insert_id();
 
-if(! $retval )
+$sql_beer = "INSERT INTO dbtablebeer (Name, BreweryName, Style, ABV, Price) 
+VALUES ('$beerName', '$breweryName', '$style', '$abv', '$price')";
+$retval_beer = mysql_query($sql_beer, $link);
+$beerID = mysql_insert_id();
+
+$sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
+VALUES ('$beerID', '$barID')";
+$retval_barbeer = mysql_query($sql_barbeer, $link);
+
+if(! $retval_bar )
 {
 
   die('Could not enter bar data: ' . mysql_error());
+  
+    if(! $retval_beer )
+    {
+  
+      die('Could not enter beer data: ' . mysql_error());
+      
+        if(! $retval_barbeer )
+        {
+      
+        die('Could not enter barbeer data: ' . mysql_error());
+      
+        }
+  
+   }
 
 }
 
-if(! $beer_retval )
-{
 
-  die('Could not enter beer data: ' . mysql_error());
 
-}
-
-if(! $barbeer_retval )
-{
-
-  die('Could not enter barbeer data: ' . mysql_error());
-
-}
-
-//echo "Entered data successfully\n";
+echo "Entered data successfully\n";
 
 
 // Close connection
