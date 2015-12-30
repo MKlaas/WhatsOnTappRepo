@@ -2,8 +2,25 @@
 <html lang="en">
 <head>
   <title>Add Bar</title>
-  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-  <script type="text/javascript">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  <script type="text/javascript">
+/* 
+$(function() {
+    var availableTags = <?php //include('autocomplete.php'); ?>;
+    $("#name").autocomplete({
+        source: availableTags,
+        autoFocus:true
+    });
+});
+  */
+  
+  $(function() {
+    $( "#names" ).autocomplete({
+        source: 'search.php'
+    });
+});
+  
   function initialize() {
     var input = document.getElementById('searchTextField');
     var options = {componentRestrictions: {country: 'us'}};
@@ -12,7 +29,9 @@
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+  
   </script>
+  
 </head>
 <body>
 
@@ -41,13 +60,24 @@
      <label for="breweryTextField">Do you know the brewery?</label> <br/>
      <input id="breweryTextField" name="breweryTextField" type="text" size="50">
    </p>
+   
+   
 
    <input type="submit" value="Add">
+
 
  </form>
  <form action="http://localhost/whatsontapprepo/whatsontapp/site/services.php">
   <input type="submit" value="Go Back">
 </form>
+<!--
+<label>Beer Name</label></br>
+<input id="name" type="text" size="50" />
+-->
+<div class="ui-widget">
+    <label for="names">Beer: </label>
+    <input id="names">
+</div>
 </body>
 </html>  
 <?php
@@ -120,6 +150,7 @@ $beerID = mysql_insert_id();
 $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
 VALUES ('$beerID', '$barID')";
 $retval_barbeer = mysql_query($sql_barbeer, $link);
+
 
 if(! $retval_bar )
 {
