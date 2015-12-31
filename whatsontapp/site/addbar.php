@@ -4,19 +4,12 @@
   <title>Add Bar</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  <script type="text/javascript">
-/* 
-$(function() {
-    var availableTags = <?php //include('autocomplete.php'); ?>;
-    $("#name").autocomplete({
-        source: availableTags,
-        autoFocus:true
-    });
-});
-  */
-  
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script type="text/javascript">
+
   $(function() {
-    $( "#names" ).autocomplete({
+    $( "#beerTextField" ).autocomplete({
         source: 'search.php'
     });
 });
@@ -41,9 +34,10 @@ $(function() {
      <input id="searchTextField" name="searchTextField" type="text" size="150">
    </p>
    <p>
-     <label for="beerTextField">What beer did you have/see?</label> <br/>
-     <input id="beerTextField" name="beerTextField" type="text" size="50">
-   </p>
+    <label for="beerTextField">Beer: </label>
+    <input id="beerTextField" name="beerTextField" type = "text">
+  </p>
+   <!--
    <p>
      <label for="priceTextField">What price was the beer?</label> <br/>
      <input id="priceTextField" name="priceTextField" type="text" size="50">
@@ -60,24 +54,16 @@ $(function() {
      <label for="breweryTextField">Do you know the brewery?</label> <br/>
      <input id="breweryTextField" name="breweryTextField" type="text" size="50">
    </p>
+-->   
    
-   
-
    <input type="submit" value="Add">
-
 
  </form>
  <form action="http://localhost/whatsontapprepo/whatsontapp/site/services.php">
   <input type="submit" value="Go Back">
 </form>
-<!--
-<label>Beer Name</label></br>
-<input id="name" type="text" size="50" />
--->
-<div class="ui-widget">
-    <label for="names">Beer: </label>
-    <input id="names">
-</div>
+
+
 </body>
 </html>  
 <?php
@@ -129,10 +115,11 @@ $country = mysql_real_escape_string($searchTextFieldArray[4]);
 
 // beer info
 $beerName= mysql_real_escape_string($beerTextField);
-$breweryName = mysql_real_escape_string($breweryTextField);
-$style = mysql_real_escape_string($styleTextField);
-$abv = mysql_real_escape_string($abvTextField);
-$price = mysql_real_escape_string($priceTextField);
+echo 'BEER NAME HERE: ' . $beerName;
+//$breweryName = mysql_real_escape_string($breweryTextField);
+//$style = mysql_real_escape_string($styleTextField);
+//$abv = mysql_real_escape_string($abvTextField);
+//$price = mysql_real_escape_string($priceTextField);
 
 
 mysql_select_db('dbname');
@@ -142,10 +129,29 @@ VALUES ('$name', '$address', '$city', '$state', '$country')";
 $retval_bar = mysql_query( $sql_bar, $link );
 $barID = mysql_insert_id();
 
-$sql_beer = "INSERT INTO dbtablebeer (Name, BreweryName, Style, ABV, Price) 
-VALUES ('$beerName', '$breweryName', '$style', '$abv', '$price')";
-$retval_beer = mysql_query($sql_beer, $link);
-$beerID = mysql_insert_id();
+$sql_beer = "SELECT BeerID, Name FROM dbtablebeer WHERE Name = '$beerName'";
+$beerSelectResult = mysql_query($sql_beer, $link);
+if (mysql_num_rows($beerSelectResult) > 0) 
+{
+    // query has results
+    echo " results found <br/>";  
+    $row = mysql_fetch_row($beerSelectResult);
+    $beerID = $row[0];
+    echo "HERE IS THE ID: " . $beerID;
+} 
+else 
+{
+    // no results
+   $sql_beer = "INSERT INTO dbtablebeer (Name) 
+   VALUES ('$beerName')";
+    /*
+    $sql_beer = "INSERT INTO dbtablebeer (Name, BreweryName, Style, ABV, Price) 
+    VALUES ('$beerName', '$breweryName', '$style', '$abv', '$price')";
+    */
+    $retval_beer = mysql_query($sql_beer, $link);
+    $beerID = mysql_insert_id();
+}
+
 
 $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
 VALUES ('$beerID', '$barID')";
@@ -157,23 +163,18 @@ if(! $retval_bar )
 
   die('Could not enter bar data: ' . mysql_error());
   
-    if(! $retval_beer )
-    {
-  
-      die('Could not enter beer data: ' . mysql_error());
-      
-        if(! $retval_barbeer )
-        {
-      
-        die('Could not enter barbeer data: ' . mysql_error());
-      
-        }
-  
-   }
+}
+if(! $retval_beer )
+{
+
+die('Could not enter beer data: ' . mysql_error());
+}
+if(! $retval_barbeer )
+{
+
+die('Could not enter barbeer data: ' . mysql_error());
 
 }
-
-
 
 echo "Entered data successfully\n";
 
