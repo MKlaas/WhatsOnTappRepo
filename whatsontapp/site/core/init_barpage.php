@@ -24,68 +24,36 @@ $rows = mysql_num_rows($barresult);
           $barCountry=$row['Country'];
   }
  
- 
- echo $barName;
- echo $barCity;
- echo $barZipCode . "<br/>";
- // this is a placedetails search 
 
-$mapearch_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barCity ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+$map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 $mapsearch_url=simplexml_load_file($map_url);
-foreach ($mapsearch_url->result as $result)
+foreach ($mapsearch_url ->result as $result)
 {
-
-	//$photo=$result->photo;
-	//$photo_reference = $result->photo->photo_reference;
-	//$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-/*
-	echo isset($photo_reference) ? '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
-            <div class="thumbnail"> <image src="'. $image .'"</image>
-                  <div class="caption">' 
-				  : 	  
-			'<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
-				<div class="thumbnail"> <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
-                  <span class="fa-stack fa-5x">
-					  <i class="fa fa-beer fa-stack-2x text-primary"></i>
-					  <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
-                    </span>
-                  <div class="caption">' ;
-*/
-
     if($result->name == $barName)  
     { 
-        echo 'TRUE TRUE TRUE';
-        echo isset($result->place_id) ? "Place ID is: " . $result->place_id : "-<br/>";
         $placeID = $result->place_id;
-        // assuming this works i then want to place the Place ID into a variable 
-        // which is then places in the details map url 
-        // to use in a details search where i will yet again extract info just like i do here currently.__CLASS__
-        // Specifically going for work hours, pictures, maybe reviews.
     } 
-    else
-    {
-        // Likely will need a redirect to 404 here;
-        echo "Sorry, no information on ". $barName . "could be found :(";
-    }
 }
-$map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=ChIJTX-EuVmxQYgR4UFlhpkdyIk&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+$map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 $mapdetails_url=simplexml_load_file($map_details);
-foreach ($map_details->result as $details_result)
+foreach ($mapdetails_url ->result as $details_result)
 {
-    $photo=$details_result->photo;
-	$photo_reference = $details_result->photo->photo_reference;
-    
-    echo isset($details_result->formatted_phone_number) ? "<small>" . $details_result->formatted_phone_number . "</small><br/>" : "-<br/>";
-    echo isset($details_result->formatted_address) ? "<small>" . $details_result->formatted_address . "</small><br/>" : "-<br/>";
-    echo isset($details_result->opening_hours->period->open->time) ? "<small> Rating:" . $details_result->opening_hours->period->open . "</small><br/>" : "-<br/>" ;
-    echo isset($details_result->opening_hours->period->close->time) ? "<small> Rating:" . $details_result->opening_hours->period->close . "</small><br/>" : "-<br/>" ;
-	echo isset($details_result->website) ? "<small>Price Level:" . $details_result->website . "</small><br/>" : "-<br/>" ;
+    $detailsPhoneNumber = isset($details_result->formatted_phone_number) ? "<small>" . $details_result->formatted_phone_number . "</small><br/>" : "-<br/>";
+    $detailsAddress = isset($details_result->formatted_address) ? "<p>" .$details_result->formatted_address . "</p>" : "-<br/>";
+    $detailsOperatingHoursMonday = isset($details_result->opening_hours->weekday_text[0]) ? "<h4> Operating Hours </h4>" . $details_result->opening_hours->weekday_text[0] . "</p>" : "-<br/>" ;
+    $detailsOperatingHoursTuesday = isset($details_result->opening_hours->weekday_text[1]) ?  "<p>" . $details_result->opening_hours->weekday_text[1] . "</p>" : "-<br/>" ;
+    $detailsOperatingHoursWednesday = isset($details_result->opening_hours->weekday_text[2]) ? $details_result->opening_hours->weekday_text[2] . "</p>" : "-<br/>" ;
+    $detailsOperatingHoursThursday = isset($details_result->opening_hours->weekday_text[3]) ? "<p>" . $details_result->opening_hours->weekday_text[3] . "</p>" : "-<br/>" ;
+    $detailsOperatingHoursFriday = isset($details_result->opening_hours->weekday_text[4]) ? "<p>" . $details_result->opening_hours->weekday_text[4] . "</p>" : "-<br/>" ;
+    $detailsOperatingHoursSaturday = isset($details_result->opening_hours->weekday_text[5]) ? "<p>" . $details_result->opening_hours->weekday_text[5] . "</p>" : "-<br/>";           
+    $detailsOperatingHoursSunday = isset($details_result->opening_hours->weekday_text[6]) ? "<p>" . $details_result->opening_hours->weekday_text[6] . "</p>" : "-<br/>" ;               
+	$detailsWebsite = isset($details_result->website) ? '<br/><a href="'. $details_result->website .'">'. $details_result->website .'</a>': "-<br/>" ;
     $photo=$result->photo;
-	$photo_reference = $result->photo->photo_reference;
-	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-    echo isset($photo_reference) ? '<image src="'. $image .'"</image>' : "-<br/>";
+	$photo_reference = $result->photo[0]->photo_reference;
+	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+    $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : "-<br/>";
 }
 
 ?>

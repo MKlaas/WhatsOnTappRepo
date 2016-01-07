@@ -64,14 +64,24 @@
     <!-- Intro Content -->
     <div class="row">
         <div class="col-md-6">
-            <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+           <?php echo $detailsImage; ?> 
         </div>
         <div class="col-md-6">
             <h2>Bar Info</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe, magni, aperiam vitae illum voluptatum aut sequi impedit non velit ab ea pariatur sint quidem corporis eveniet. Odit, temporibus reprehenderit dolorum!</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis?</p>
-        </div>
+            <?php   
+                echo $detailsAddress;
+                echo $detailsPhoneNumber;
+                echo $detailsWebsite;
+            
+                echo $detailsOperatingHoursMonday;
+                echo $detailsOperatingHoursTuesday;
+                echo $detailsOperatingHoursWednesday;
+                echo $detailsOperatingHoursThursday;
+                echo $detailsOperatingHoursFriday;
+                echo $detailsOperatingHoursSaturday;
+                echo $detailsOperatingHoursSunday;
+             ?>
+      </div>
     </div>
     <!-- /.row -->
 
@@ -82,24 +92,21 @@
         <div class="col-lg-12">
             <h2 class="page-header">Either additional pictures of the bar, nearby bars area, or food/drink pictures.</h2>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6">
-            <img class="img-responsive customer-img" src="http://placehold.it/500x300" alt="">
-        </div>
+        <?php
+        $i=0;
+            foreach ($mapdetails_url->result->photo as $details_photos)
+            {
+                if($i>=6) break;
+                $photo_reference = $details_photos->photo_reference;
+                $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=200&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+                echo isset($photo_reference) ? '<div class="col-md-2 col-sm-4 col-xs-6">
+                                                                <img class="img-responsive customer-img" width="200" height="200" src="'. $image .'"/>
+                                                                </div>' 
+                                                                : "-<br/>";
+                $i++;
+            }
+        ?>
+        
     </div>
     <!-- /.row -->
     
@@ -131,9 +138,15 @@
                 </div>
                 <div class="tab-pane fade" id="service-three">
                     <h4>Reviews</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
-                </div>
+                    <?php 
+                    foreach ($mapdetails_url->result->review as $details_reviews)
+                    {
+                        echo isset($details_reviews->author_name) ? "<strong>" . $details_reviews->author_name . "</strong><br/>" : "-<br/>";
+                        echo isset($details_reviews->rating) ? "Rating: " . $details_reviews->rating : "-<br/>";
+                        echo isset($details_reviews->text) ? "<p>". $details_reviews->text ."</p>" : "-<br/>";
+                    }
+                    ?>
+                 </div>
             </div>
 
         </div>
