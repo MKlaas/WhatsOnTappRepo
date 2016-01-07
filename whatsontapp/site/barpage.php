@@ -36,8 +36,7 @@
       <?php
       include('includes/navbar.php'); 
       ?>
-
-
+<?php include('core/init_barpage.php'); ?> 
       <!-- Page Content -->
       <div class="container">
        
@@ -46,8 +45,10 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Bar Page
-                    <small>(bar name)</small>
+                <h1 class="page-header">
+                    <?php 
+                    echo $barName;
+                    ?>
                 </h1>
 				<!--
                 <ol class="breadcrumb">
@@ -121,9 +122,8 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="service-one">
                     <h4>List of Drinks</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
-                </div>
+                    <?php include('core/init_barpage_drinklist.php'); ?> 
+                 </div>
                 <div class="tab-pane fade" id="service-two">
                     <h4> List of Food</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>

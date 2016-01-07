@@ -54,14 +54,23 @@ echo '<div class="row"> ';
 
 foreach ($xml->result as $result)
 {
-	
-
-	if(in_array($result->name, $barName))
+    if(in_array($result->name, $barName))
 	{
-		$photo=$result->photo;
+        $barNameValue = mysql_real_escape_string($result->name);
+        $barIDQuery="SELECT BarID 
+            FROM dbtablebar
+            WHERE Name= '$barNameValue'";
+        $barIDResult=mysql_query($barIDQuery);
+        $barIDRows = mysql_num_rows($barIDResult);
+        
+        while($row=mysql_fetch_array($barIDResult)){
+       //$barName=$row['Name','BarID'];
+          $barIDValue=$row['BarID'];
+        }
+        
+	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-
 	echo isset($photo_reference) ? '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
             <div class="thumbnail"> <image src="'. $image .'"</image>
                   <div class="caption">' 
@@ -73,7 +82,7 @@ foreach ($xml->result as $result)
 					  <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
                     </span>
                   <div class="caption">' ;
-		echo isset($result->name) ? "<h4><a href=''>" . $result->name . "</a></h4>" : "-<br/>";
+		echo isset($result->name) ? "<h4><a  href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
 			echo isset($result->formatted_address) ? "<small>" . $result->formatted_address . "</small><br/>" : "-<br/>";
 	echo isset($result->rating) ? "<small> Rating:" . $result->rating . "</small><br/>" : "-<br/>" ;
 	echo isset($result->price_level) ? "<small>Price Level:" . $result->price_level . "</small><br/>" : "-<br/>" ;

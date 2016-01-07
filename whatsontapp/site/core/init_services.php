@@ -28,23 +28,35 @@ $connection = mysql_connect("localhost", "root", "admin");
 $db = mysql_select_db("brew_view", $connection);
 // SQL query to fetch information of beer types and finds matches.
 
-$sqlquery="SELECT Name FROM dbtablebar";
+$sqlquery="SELECT BarID, Name FROM dbtablebar";
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);
 
-$barName=array();
+//$barName=array();
   //-create  while loop and loop through result set
+
   while($row=mysql_fetch_array($sqlresult)){
+       //$barName=$row['Name','BarID'];
           $barName[]=$row['Name'];
-		  
+          //$barID[]=$row['BarID'];
+          //$barIDD=$row['BarID'];
+          $state = $row['State'];
+          //echo "<ul>\n";
+           //echo "<li>" . "<a  href=\"barpage.php?id=$barID\">"   .$barName . " " . $barIDD . "</a></li>\n";
+		  //echo "</ul>";
   }
+ 
 $divid = 1;
+// this is a placedetails search 
+$map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=ChIJTX-EuVmxQYgR4UFlhpkdyIk&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);
 
 echo '<div class="row"> ';
 foreach ($xml->result as $result)
 {
+
+
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
@@ -63,8 +75,21 @@ foreach ($xml->result as $result)
 
 	if(in_array($result->name, $barName))
 	{
-		echo isset($result->name) ? "<h4><a href=''>" . $result->name . "</a></h4>" : "-<br/>";
-	}
+        $barNameValue = mysql_real_escape_string($result->name);
+        $barIDQuery="SELECT BarID 
+            FROM dbtablebar
+            WHERE Name= '$barNameValue'";
+        $barIDResult=mysql_query($barIDQuery);
+        $barIDRows = mysql_num_rows($barIDResult);
+        
+        while($row=mysql_fetch_array($barIDResult)){
+       //$barName=$row['Name','BarID'];
+          $barIDValue=$row['BarID'];
+        }
+          
+		echo isset($result->name) ? "<h4><a  href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
+	       
+    }
 	
 	else 
 	{

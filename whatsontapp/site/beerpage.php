@@ -79,11 +79,7 @@ include('includes/navbar.php');
 <?php
 include('core/init_search_service.php'); 
 ?>
- 
-
-
         <hr>
-
         <!-- Footer -->
         <footer>
             <div class="row">
