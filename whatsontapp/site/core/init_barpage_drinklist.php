@@ -25,7 +25,7 @@ $rows = mysql_num_rows($barbeerresult);
         //  $beerPrice=$row['Price'];
          // $breweryID=$row['BreweryID'];
           echo "<ul style='list-style-type:none;'>";
-          echo "<li><font color='#377BB5'><a  href=\"beerpage.php?id=$beerID\">"  .$beerName . " - " . $beerStyle . " - " . $beerABV . "</a></font></li>\n";
+          echo "<li><font color='#377BB5'><a  href=\"beerpage.php?id=$beerID\">"  .$beerName . " - " . $beerStyle . " - " . $beerABV . "%</a></font></li>\n";
 		  echo "</ul>";
   }
 

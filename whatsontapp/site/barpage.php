@@ -72,7 +72,6 @@
                 echo $detailsAddress;
                 echo $detailsPhoneNumber;
                 echo $detailsWebsite;
-            
                 echo $detailsOperatingHoursMonday;
                 echo $detailsOperatingHoursTuesday;
                 echo $detailsOperatingHoursWednesday;

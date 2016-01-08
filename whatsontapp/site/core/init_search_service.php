@@ -15,12 +15,10 @@ echo '<iframe
 	  src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAsQreVM5VjCc_yXcMWPVJx3zeqWHyhOsc
 		&q=bars+near+'.$address.'" allowfullscreen>
 	</iframe>';
-	
-$beerID = $_GET['id']; 
-$beername = "Head Hunter";
-echo "<h4>Bars Near <strong> " . $address ." </strong> <br/> With The Beer Name " . $beername . "</h4>";
-
  
+
+$beerID = $_GET['id'];
+echo "<br/> Bars Near <strong> " . $address ." </strong> <br/> With The Beer Name ";
 
 $connection = mysql_connect("localhost", "root", "admin");
 
@@ -37,6 +35,7 @@ WHERE a.BarID=c.BarID
 AND b.BeerID=c.BeerID 
 AND b.BeerID = $beerID";
 
+
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);
 
@@ -45,7 +44,9 @@ $barName=array();
   while($row=mysql_fetch_array($sqlresult)){
 	  // select the index from a.name,
           $barName[]=$row[0];
+          $beername = $row[4];
   }
+  echo "<strong>" . $beername . "</strong>";
 $divid = 1;
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);

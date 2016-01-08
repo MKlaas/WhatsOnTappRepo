@@ -24,7 +24,7 @@ $rows = mysql_num_rows($barresult);
           $barCountry=$row['Country'];
   }
  
-
+echo $barZipCode;
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 $mapsearch_url=simplexml_load_file($map_url);
@@ -33,7 +33,9 @@ foreach ($mapsearch_url ->result as $result)
     if($result->name == $barName)  
     { 
         $placeID = $result->place_id;
+        echo 'Info Collected';
     } 
+    echo '--';
 }
 $map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 

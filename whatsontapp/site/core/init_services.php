@@ -57,6 +57,7 @@ foreach ($xml->result as $result)
 {
 
 
+    $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
@@ -93,7 +94,7 @@ foreach ($xml->result as $result)
 	
 	else 
 	{
-		echo "<div style='float:right; font-size:200%;'><a href='addbar.php'>+</a></div>";
+		echo "<div style='float:right; font-size:200%;'><a href='addbar.php?adr=$zip'>+</a></div>";
 		echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
 	
 	}
