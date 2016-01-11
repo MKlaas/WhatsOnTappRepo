@@ -119,8 +119,10 @@
             <ul id="myTab" class="nav nav-tabs nav-justified">
                 <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-glass"></i> List of Drinks</a>
                 </li>
+                <!--
                 <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-cutlery"></i> List of Food</a>
                 </li>
+                -->
                 <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-thumbs-up"></i> Reviews</a>
                 </li>
             </ul>
@@ -128,14 +130,24 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="service-one">
                     <h4>List of Drinks</h4>
+<form action="#" method="post">
+
+   <p>
+    <label for="beerTextField">Beer: </label>
+    <input id="beerTextField" name="beerTextField" type = "text">
+  </p>
+  <input type="submit" value="Add">
                     <?php include('core/init_barpage_drinklist.php'); ?> 
                  </div>
+                 <!-- maybe later
                 <div class="tab-pane fade" id="service-two">
                     <h4> List of Food</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
                 </div>
+                 -->
                 <div class="tab-pane fade" id="service-three">
+                  
                     <h4>Reviews</h4>
                     <?php 
                     foreach ($mapdetails_url->result->review as $details_reviews)
@@ -145,6 +157,8 @@
                         echo isset($details_reviews->text) ? "<p>". $details_reviews->text ."</p>" : "-<br/>";
                     }
                     ?>
+                    
+
                  </div>
             </div>
 

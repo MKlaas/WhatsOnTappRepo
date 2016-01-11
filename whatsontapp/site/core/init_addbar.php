@@ -28,6 +28,7 @@ if (!mysql_select_db($dbname, $link)) {
 ?>
 <br/>
 <?php
+
 $searchTextField = $_POST['searchTextField'];
 $searchTextFieldArray = explode(',', $searchTextField);
 $zipTextField = $_POST['zip_code'];
@@ -47,7 +48,7 @@ $zipcode = mysql_real_escape_string($zipTextField);
 echo 'Zip Code is: ' . $zipcode;
 // beer info
 $beerName= mysql_real_escape_string($beerTextField);
-echo 'BEER NAME HERE: ' . $beerName;
+echo '<br/>BEER NAME HERE: ' . $beerName . "<br/>";
 //$breweryName = mysql_real_escape_string($breweryTextField);
 //$style = mysql_real_escape_string($styleTextField);
 //$abv = mysql_real_escape_string($abvTextField);
@@ -61,6 +62,19 @@ VALUES ('$name', '$address', '$city', '$state', '$country', $zipcode)";
 $retval_bar = mysql_query( $sql_bar, $link );
 $barID = mysql_insert_id();
 
+
+// beer stuff with brewerydb api
+$api_key = "6dab466c8f0979f11e35908c1b6671ff";
+$brewerydb_api_url = "http://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$beerName."&p=1&key=".$api_key."&format=xml";
+$api_url=simplexml_load_file($brewerydb_api_url);
+$brewerydb_results = $api_url-> data -> item;
+$brewerydb_id = isset($brewerydb_results -> id) ? $brewerydb_results -> id  : ""; 
+$brewerydb_name = isset($brewerydb_results -> name) ? $brewerydb_results -> name  : ""; 
+
+
+
+// old sql query beer stuff
+/*
 $sql_beer = "SELECT BeerID, Name FROM dbtablebeer WHERE Name = '$beerName'";
 $beerSelectResult = mysql_query($sql_beer, $link);
 if (mysql_num_rows($beerSelectResult) > 0) 
@@ -80,13 +94,15 @@ else
     $sql_beer = "INSERT INTO dbtablebeer (Name, BreweryName, Style, ABV, Price) 
     VALUES ('$beerName', '$breweryName', '$style', '$abv', '$price')";
     */
+    /*
     $retval_beer = mysql_query($sql_beer, $link);
     $beerID = mysql_insert_id();
+   
 }
-
+*/
 
 $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
-VALUES ('$beerID', '$barID')";
+VALUES ('$brewerydb_id', '$barID')";
 $retval_barbeer = mysql_query($sql_barbeer, $link);
 
 
@@ -96,11 +112,13 @@ if(! $retval_bar )
   die('Could not enter bar data: ' . mysql_error());
   
 }
+/*
 if(! $retval_beer )
 {
 
 die('Could not enter beer data: ' . mysql_error());
 }
+*/
 if(! $retval_barbeer )
 {
 
