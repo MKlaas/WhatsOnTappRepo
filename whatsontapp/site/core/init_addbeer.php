@@ -4,7 +4,7 @@ $barID = $_GET['id'];
 {
     $barID = $_GET['brid'];
     addBeer();
-    echo "<script>setTimeout(function(){window.location.href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},5000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
     echo "</head>";
     
 }
@@ -69,9 +69,6 @@ echo '<p> If this isn\'t the beer you\'re looking for, try searching again. </p>
             <br/>';
     
 }
-
-
-
 
 function addBeer()
 {

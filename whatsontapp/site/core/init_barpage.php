@@ -36,7 +36,9 @@ foreach ($mapsearch_url ->result as $result)
         $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
         $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : 
             '
-            <i style="font-size:400px;" class="fa fa-building fa-stack-2x text-primary"></i>
+            <div style="width:575px; height=:375px;">
+            <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
+            </div>
             ';
     } 
 }

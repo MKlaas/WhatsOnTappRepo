@@ -46,8 +46,6 @@ $rows = mysql_num_rows($barbeerresult);
         $brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? $brewerydb_results -> breweries -> item -> name : "-";
         echo "<ul style='list-style-type:none;'>";
         echo "<li><font color='#377BB5'><a  href=\"beerpage.php?id=$beerID\">" .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv ." %</a></font></li>\n";
-          
-//get beers by id. Separate by comma
         echo "</ul>";
 
   }
@@ -63,7 +61,7 @@ $brewerydb_id = isset($brewerydb2_results -> id) ? $brewerydb2_results -> id  : 
  echo ' <form  method="post" action="addbeer.php?go&id='.$barID.'"  id="searchform">
                         <p>See a new beer at the bar? Search for and add it here!</p>
                         <input  type="text" name="name">
-                        <input  type="submit" name="submit" value="Search Beers">
+                        <input  type="submit" name="submit" value="Search For The Beer">
                       </form>
                       <br/>';
 

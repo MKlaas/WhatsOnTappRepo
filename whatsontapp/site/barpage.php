@@ -88,6 +88,7 @@
 
     <!-- Our Customers -->
     <div class="row">
+        <br/><br/>
         <div class="col-lg-12">
             <h2 class="page-header">Either additional pictures of the bar, nearby bars area, or food/drink pictures.</h2>
         </div>
