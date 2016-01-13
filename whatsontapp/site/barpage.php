@@ -130,13 +130,6 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="service-one">
                     <h4>List of Drinks</h4>
-<form action="#" method="post">
-
-   <p>
-    <label for="beerTextField">Beer: </label>
-    <input id="beerTextField" name="beerTextField" type = "text">
-  </p>
-  <input type="submit" value="Add">
                     <?php include('core/init_barpage_drinklist.php'); ?> 
                  </div>
                  <!-- maybe later

@@ -1,6 +1,5 @@
 <?php
 $barID = $_GET['id'];
-
 $connection = mysql_connect("localhost", "root", "admin");
 
 // Selecting Database
@@ -31,13 +30,14 @@ foreach ($mapsearch_url ->result as $result)
 {
     if($result->name == $barName)  
     { 
-        $placeID = $result->place_id;
-        echo 'Info Collected';
-        
+        $placeID = $result->place_id;        
         //$photo=$result->photo;
         $photo_reference = $result->photo[0]->photo_reference;
         $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-        $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : "-<br/>";
+        $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : 
+            '
+            <i style="font-size:400px;" class="fa fa-building fa-stack-2x text-primary"></i>
+            ';
     } 
 }
 $map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";

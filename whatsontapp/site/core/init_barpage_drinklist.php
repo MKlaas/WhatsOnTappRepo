@@ -1,5 +1,4 @@
 <?php
-
 $servername = "localhost";
 $dbrootname = "root";
 $dbpassword = "admin";
@@ -25,13 +24,6 @@ if (!mysql_select_db($dbname, $link)) {
   exit;
 }
 // SQL query to fetch information of beer types and finds matches.
-//for the barbeer table
-/*
-$barbeerquery="SELECT b.BeerID, b.Name,b.BreweryName, b.Style, b.ABV 
-FROM dbtablebeer b, dbtablebarbeer c 
-WHERE BarID= $barID 
-AND b.BeerID=c.BeerID ";
-*/
 $barbeerquery="SELECT BeerID 
 FROM dbtablebarbeer
 WHERE BarID= $barID";
@@ -65,22 +57,16 @@ $api_key = "6dab466c8f0979f11e35908c1b6671ff";
 $brewerydb_api_url = "http://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$beerName."&p=1&key=".$api_key."&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);
 $brewerydb2_results = $api_url-> data -> item;
-$brewerydb_id = isset($brewerydb2_results -> id) ? $brewerydb2_results -> id  : ""; 
 
-echo "See a beer not on the list? Add it here!! <br/> ";
+$brewerydb_id = isset($brewerydb2_results -> id) ? $brewerydb2_results -> id  : NULL; 
 
-echo $brewerydb_id ."<br/>";
-echo $barID . "<br/>";
-$sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
-VALUES ('$brewerydb_id', '$barID')";
-$retval_barbeer = mysql_query($sql_barbeer, $link);
+ echo ' <form  method="post" action="addbeer.php?go&id='.$barID.'"  id="searchform">
+                        <p>See a new beer at the bar? Search for and add it here!</p>
+                        <input  type="text" name="name">
+                        <input  type="submit" name="submit" value="Search Beers">
+                      </form>
+                      <br/>';
 
-if(! $retval_barbeer )
-{
-
-die('Could not enter barbeer data: ' . mysql_error());
-
-}
 
 ?>
 

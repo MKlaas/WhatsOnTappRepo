@@ -25,22 +25,11 @@ $connection = mysql_connect("localhost", "root", "admin");
 
 // Selecting Database
 $db = mysql_select_db("brew_view", $connection);
-// SQL query to fetch information of beer types and finds matches.
-
-//$sqlquery="SELECT Name FROM dbtablebar";
-/*
-$sqlquery="SELECT a.name,a.address,a.city,a.zipcode, b.name,b.breweryname, b.style, b.abv 
-FROM dbtablebar a, dbtablebeer b, dbtablebarbeer c 
-WHERE a.BarID=c.BarID 
-AND c.BeerID = $beerID";
-*/
-
 
 $sqlquery="SELECT a.name,a.address,a.city,a.zipcode
 FROM dbtablebar a, dbtablebarbeer b 
 WHERE a.BarID=b.BarID 
 AND b.BeerID = '$beerID'";
-
 
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);

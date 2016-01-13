@@ -52,7 +52,7 @@ include('includes/navbar.php');
  
 		
 		  
-<div style="float:right;">					
+<div style="float:right;">
   <h3>Search Details</h3>
     <p>You  may search name or type</p>
     <form  method="post" action="search_display.php?go"  id="searchform">

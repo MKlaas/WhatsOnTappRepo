@@ -19,10 +19,7 @@ echo '<iframe
 
 echo "<h4>Bars Within <strong> " . $address ." </strong></h4>";
 
- 
-
 $connection = mysql_connect("localhost", "root", "admin");
-
 
 // Selecting Database
 $db = mysql_select_db("brew_view", $connection);
@@ -55,8 +52,6 @@ $xml=simplexml_load_file($map_url);
 echo '<div class="row"> ';
 foreach ($xml->result as $result)
 {
-
-
     $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
@@ -88,7 +83,7 @@ foreach ($xml->result as $result)
           $barIDValue=$row['BarID'];
         }
           
-		echo isset($result->name) ? "<h4><a  href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
+		echo isset($result->name) ? "<h4><a href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
 	       
     }
 	
