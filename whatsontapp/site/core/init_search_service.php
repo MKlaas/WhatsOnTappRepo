@@ -18,10 +18,9 @@ echo '<iframe
  
 
 $beerID = $_GET['id'];
-echo "<br/> Bars Near <strong> " . $address ." </strong> <br/> With The Beer Name ";
+echo "<br/> Bars Near <strong> " . $address ." </strong> <br/> With The Beer  ";
 
 $connection = mysql_connect("localhost", "root", "admin");
-
 
 // Selecting Database
 $db = mysql_select_db("brew_view", $connection);
@@ -39,9 +38,14 @@ $barName=array();
   while($row=mysql_fetch_array($sqlresult)){
 	  // select the index from a.name,
           $barName[]=$row[0];
-          $beername = $row[4];
   }
-  echo "<strong>" . $beername . "</strong>";
+$api_key = "6dab466c8f0979f11e35908c1b6671ff";
+$brewerydb_api_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
+$api_url=simplexml_load_file($brewerydb_api_url);
+$brewerydb_results = $api_url -> data -> item;
+$brewerydb_name = isset($brewerydb_results -> name) ? $brewerydb_results -> name : "- <br/>"; 
+
+echo "\"<strong> " . $brewerydb_name . " </strong>\"";
 $divid = 1;
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);
@@ -81,9 +85,7 @@ foreach ($xml ->result as $result)
 		echo isset($result->name) ? "<h4><a  href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
 			echo isset($result->formatted_address) ? "<small>" . $result->formatted_address . "</small><br/>" : "-<br/>";
 	echo isset($result->rating) ? "<small> Rating:" . $result->rating . "</small><br/>" : "-<br/>" ;
-	echo isset($result->price_level) ? "<small>Price Level:" . $result->price_level . "</small><br/>" : "-<br/>" ;
-	
-	
+	echo isset($result->price_level) ? "<small>Price Level:" . $result->price_level . "</small><br/>" : "-<br/>" ;	
 	echo ' 		 </div>
 			  </div>
 		   </div> ';

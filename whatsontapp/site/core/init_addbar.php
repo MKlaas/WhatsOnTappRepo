@@ -65,7 +65,6 @@ if(isset($_POST['Add']))
 {
     addBar();
     echo "<script>setTimeout(function(){window.location.href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
-    
 }
 else 
 {

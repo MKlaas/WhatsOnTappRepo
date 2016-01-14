@@ -56,7 +56,7 @@ $brewerydb_results = $api_url-> data -> item;
   $i = 0;
   foreach ($api_url-> data -> item as $brewerydb_results)
     {
-        if ($i >= 20) break;
+        if ($i >= 100) break;
         
         // xml tags into variable
         $brewerydb_id = isset($brewerydb_results -> id) ?  $brewerydb_results -> id  : "-"; 
