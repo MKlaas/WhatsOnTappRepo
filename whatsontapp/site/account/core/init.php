@@ -10,12 +10,10 @@ else
 // Define $username and $password
 $username=$_POST['form-username'];
 $password=$_POST['form-password'];
-// Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysql_connect("localhost", "root", "admin");
 
+// Connection
+include(dirname(__DIR__).'../../core/init_connect.php');
 
-// Selecting Database
-$db = mysql_select_db("brew_view", $connection);
 // SQL query to fetch information of registerd users and finds user match.
 $query = mysql_query("select * from dbtableuser where Password='$password' AND UserName='$username'", $connection);
 $rows = mysql_num_rows($query);

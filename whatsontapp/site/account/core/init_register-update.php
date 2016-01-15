@@ -2,31 +2,11 @@
  <?php
  function AddUser()
  {
-$servername = "localhost";
-$dbrootname = "root";
-$dbpassword = "admin";
-$dbname = "brew_view";
 
-// Create connection
-$conn = new mysqli($servername, $dbrootname, $dbpassword);
+// Connection     
+include(dirname(__DIR__).'../../core/init_connect.php');
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-//echo "Connected successfully"; 
-
-
-if (!$link = mysql_connect($servername, $dbrootname, $dbpassword)) {
-    echo 'Could not connect to mysql';
-    exit;
-}
- 
-if (!mysql_select_db($dbname, $link)) {
-    echo 'Could not select database';
-    exit;
-}
- 
+//db names into variable
 $username = $_POST['username'];
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
@@ -51,7 +31,7 @@ $password = $_POST['password'];
    
  
 // Close connection
-mysql_close();
+mysql_close($connection);
  }
 function UpdateUser()
 {
@@ -103,9 +83,6 @@ $password = $_POST['password'];
    
    echo "Update Successful \n";
    
- 
-// Close connection
-mysql_close();
 
 }
 ?>

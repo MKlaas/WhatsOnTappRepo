@@ -1,9 +1,6 @@
 <?php
 $barID = $_GET['id'];
-$connection = mysql_connect("localhost", "root", "admin");
-
-// Selecting Database
-$db = mysql_select_db("brew_view", $connection);
+include(dirname(__DIR__).'/core/init_connect.php');
 // SQL query to fetch information of beer types and finds matches.
 // for the bars table
 $barquery="SELECT Name, Address, City, State, ZipCode, PhoneNumber, Country 
@@ -22,12 +19,14 @@ $rows = mysql_num_rows($barresult);
           $barPhoneNumber=$row['PhoneNumber'];
           $barCountry=$row['Country'];
   }
- 
+
+// google places api
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 $mapsearch_url=simplexml_load_file($map_url);
 foreach ($mapsearch_url ->result as $result)
 {
+    // if its in our database, list it
     if($result->name == $barName)  
     { 
         $placeID = $result->place_id;        
@@ -42,11 +41,13 @@ foreach ($mapsearch_url ->result as $result)
             ';
     } 
 }
+// google places detail api
 $map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 $mapdetails_url=simplexml_load_file($map_details);
 foreach ($mapdetails_url ->result as $details_result)
 {
+    // results to variable
     $detailsPhoneNumber = isset($details_result->formatted_phone_number) ? "<small>" . $details_result->formatted_phone_number . "</small><br/>" : "-<br/>";
     $detailsAddress = isset($details_result->formatted_address) ? "<p>" .$details_result->formatted_address . "</p>" : "-<br/>";
     $detailsOperatingHoursMonday = isset($details_result->opening_hours->weekday_text[0]) ? "<h4> Operating Hours </h4>" . $details_result->opening_hours->weekday_text[0] . "</p>" : "-<br/>" ;
@@ -59,5 +60,5 @@ foreach ($mapdetails_url ->result as $details_result)
 	$detailsWebsite = isset($details_result->website) ? '<br/><a href="'. $details_result->website .'">'. $details_result->website .'</a>': "-<br/>" ;
     
 }
-
+mysql_close($connection);    
 ?>

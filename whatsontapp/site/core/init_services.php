@@ -19,17 +19,14 @@ echo '<iframe
 
 echo "<h4>Bars Within <strong> " . $address ." </strong></h4>";
 
-$connection = mysql_connect("localhost", "root", "admin");
+// Connection
+include(dirname(__DIR__).'/core/init_connect.php');
 
-// Selecting Database
-$db = mysql_select_db("brew_view", $connection);
 // SQL query to fetch information of beer types and finds matches.
-
 $sqlquery="SELECT BarID, Name FROM dbtablebar";
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);
 
-//$barName=array();
   //-create  while loop and loop through result set
 
   while($row=mysql_fetch_array($sqlresult)){
@@ -43,18 +40,20 @@ $rows = mysql_num_rows($sqlresult);
 		  //echo "</ul>";
   }
  
-$divid = 1;
-// this is a placedetails search 
-$map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=ChIJTX-EuVmxQYgR4UFlhpkdyIk&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+$divid = 1; // set this to increment in loop giving each div a unique id
+
+// google places api search
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $address ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 $xml=simplexml_load_file($map_url);
 
 echo '<div class="row"> ';
+// load through results place within html and generate page
 foreach ($xml->result as $result)
 {
     $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
+    // photo reference requires separate google places api call to generate image
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
 	echo isset($photo_reference) ? '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
@@ -68,7 +67,8 @@ foreach ($xml->result as $result)
 					  <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
                     </span>
                   <div class="caption">' ;
-
+      
+      // get barid from barname if in the the database, use id for url endpoint
 	if(in_array($result->name, $barName))
 	{
         $barNameValue = mysql_real_escape_string($result->name);

@@ -20,10 +20,8 @@ echo '<iframe
 $beerID = $_GET['id'];
 echo "<br/> Bars Near <strong> " . $address ." </strong> <br/> With The Beer  ";
 
-$connection = mysql_connect("localhost", "root", "admin");
-
-// Selecting Database
-$db = mysql_select_db("brew_view", $connection);
+// connection
+include(dirname(__DIR__).'/core/init_connect.php');
 
 $sqlquery="SELECT a.name,a.address,a.city,a.zipcode
 FROM dbtablebar a, dbtablebarbeer b 
@@ -40,6 +38,7 @@ $barName=array();
           $barName[]=$row[0];
   }
 $api_key = "6dab466c8f0979f11e35908c1b6671ff";
+// brewerydb api search by id
 $brewerydb_api_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);
 $brewerydb_results = $api_url -> data -> item;
@@ -52,8 +51,10 @@ $xml=simplexml_load_file($map_url);
 
 echo '<div class="row"> ';
 
+// go through xml file 
 foreach ($xml ->result as $result)
 {
+    // get the bar id of the bar name to place as the id to hyperlinks to use in url later
     if(in_array($result->name, $barName))
 	{
         $barNameValue = mysql_real_escape_string($result->name);
@@ -70,6 +71,7 @@ foreach ($xml ->result as $result)
         
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
+    // photo reference requires separate google places api call to generate the image
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 	echo isset($photo_reference) ? '<div id="'. $divid++ .'"  class="col-md-4 text-center" style="height:350px; width:350px;">
             <div class="thumbnail"> <image src="'. $image .'"</image>
