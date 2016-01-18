@@ -39,7 +39,7 @@ $barName=array();
   }
 $api_key = "6dab466c8f0979f11e35908c1b6671ff";
 // brewerydb api search by id
-$brewerydb_api_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
+$brewerydb_api_url = "https://api.brewerydb.com/v2/beers?ids=".$beerID."&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);
 $brewerydb_results = $api_url -> data -> item;
 $brewerydb_name = isset($brewerydb_results -> name) ? $brewerydb_results -> name : "- <br/>"; 

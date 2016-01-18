@@ -5,7 +5,7 @@ $barID = $_GET['id'];
 {
     $barID = $_GET['brid'];
     addBeer();
-    echo "<script>setTimeout(function(){window.location.href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
     echo "</head>";
     
 }
@@ -22,8 +22,9 @@ else
         {
         $name=$_POST['name'];
         $api_key = "6dab466c8f0979f11e35908c1b6671ff";
+        
         // brewerydb api
-        $brewerydb_api_url = "http://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
+        $brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
 
         $api_url=simplexml_load_file($brewerydb_api_url);
         $brewerydb_results = $api_url-> data -> item;
@@ -92,7 +93,7 @@ $brewerydb_id_value = $_GET['beid'];
     } 
     else
     {
-        echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>bar</a>";
+        echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>bar</a>";
     }
     mysql_close($connection);
     

@@ -15,7 +15,7 @@ $rows = mysql_num_rows($barbeerresult);
   while($row=mysql_fetch_array($barbeerresult)){
         $beerID = $row['BeerID'];
         
-        $beer_details_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries=y&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
+        $beer_details_url = "https://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries=y&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
         $api_url=simplexml_load_file($beer_details_url);
         $brewerydb_results = $api_url-> data -> item;
         $brewerydb_name = isset($brewerydb_results -> name) ? $brewerydb_results -> name  : "-"; 
@@ -32,7 +32,7 @@ $beerName= mysql_real_escape_string($beerTextField);
 
 $api_key = "6dab466c8f0979f11e35908c1b6671ff";
 // brewerydb api searching for beer by name
-$brewerydb_api_url = "http://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$beerName."&p=1&key=".$api_key."&format=xml";
+$brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$beerName."&p=1&key=".$api_key."&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);
 $brewerydb2_results = $api_url-> data -> item;
 

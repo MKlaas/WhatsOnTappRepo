@@ -46,7 +46,7 @@ $name=$_POST['name'];
 
 // load api url into xml reader
 $api_key = "6dab466c8f0979f11e35908c1b6671ff";
-$brewerydb_api_url = "http://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
+$brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
 
 $api_url=simplexml_load_file($brewerydb_api_url);
 $brewerydb_results = $api_url-> data -> item;

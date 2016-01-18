@@ -15,7 +15,7 @@ $password=$_POST['form-password'];
 include(dirname(__DIR__).'../../core/init_connect.php');
 
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("select * from dbtableuser where Password='$password' AND UserName='$username'", $connection);
+$query = mysql_query("select * from dbtableuser where Password=sha1('$password') AND UserName='$username'", $connection);
 $rows = mysql_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session

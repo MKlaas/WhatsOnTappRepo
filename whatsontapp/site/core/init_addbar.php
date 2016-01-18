@@ -21,7 +21,7 @@ $country = mysql_real_escape_string($searchTextFieldArray[4]);
 $zipcode = mysql_real_escape_string($zipTextField);
 
 $sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country, zipcode) 
-VALUES ('$name', '$address', '$city', '$state', '$country', $zipcode)";
+VALUES ('$name', '$address', '$city', '$state', '$country', '$zipcode')";
 $retval_bar = mysql_query( $sql_bar, $connection );
 global $barID;
 $barID = mysql_insert_id();
@@ -33,7 +33,7 @@ if(! $retval_bar )
 }
 
 echo "<p>Thanks, follow us to the bar!</p>";
-echo "<p>If you get lost go <a href = 'http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>here</a>.</p>";
+echo "<p>If you get lost go <a href = '/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>here</a>.</p>";
 
 // Close connection
 mysql_close($connection);    
@@ -43,7 +43,7 @@ mysql_close($connection);
 if(isset($_POST['Add']))
 {
     addBar();
-    echo "<script>setTimeout(function(){window.location.href='http://localhost/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
 }
 else 
 {
@@ -58,7 +58,7 @@ else
     <input type="submit" name="Add" value="Add">
 
  </form>
- <form action="http://localhost/whatsontapprepo/whatsontapp/site/services.php">
+ <form action="/whatsontapprepo/whatsontapp/site/services.php">
   <input type="submit" value="Go Back">
 </form>';
 }
