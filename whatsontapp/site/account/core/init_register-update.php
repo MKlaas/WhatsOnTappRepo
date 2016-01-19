@@ -19,7 +19,6 @@ $password = $_POST['password'];
  $sql = "INSERT INTO dbtableuser (username, firstname, lastname, city, state, zipcode, email, password) 
 		VALUES ('$username','$firstname', '$lastname', '$city', '$state', '$zipcode', '$email',sha1('$password'))";
 	  
-   mysql_select_db('dbname');
    $retval = mysql_query( $sql, $connection );
    
    if(! $retval )

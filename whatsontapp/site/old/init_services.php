@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
-include('account\core\init_profile.php'); 
+include ('/home/a3545591/public_html/whatsontapp/site/core/init_connect.php');
+
 $address = $zip;
 if ($_POST['address_submit_button']) {
 
@@ -50,7 +51,6 @@ echo '<div class="row"> ';
 // load through results place within html and generate page
 foreach ($xml->result as $result)
 {
-    $name = $result->name;
     $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
@@ -90,7 +90,7 @@ foreach ($xml->result as $result)
 	
 	else 
 	{
-		echo "<div style='float:right; font-size:200%;'><a href='addbar.php?n=$name'>+</a></div>";
+		echo "<div style='float:right; font-size:200%;'><a href='addbar.php?adr=$zip'>+</a></div>";
 		echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
 	
 	}

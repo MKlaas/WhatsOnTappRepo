@@ -15,7 +15,7 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700'>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-
+        <script src="http://ziplookup.googlecode.com/git/zip-lookup/zip-lookup.min.js" type="text/javascript" ></script>
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -57,12 +57,12 @@
                         <input type="text" id="firstname" name="firstname" placeholder="enter your first name...">
                         <label for="lastname">Last Name</label>
 						<input type="text" id="lasttname" name="lastname" placeholder="enter your Last name...">
-						<label for="city">City:</label>
-						<input type="text" name="city" id="city" placeholder="enter your City...">
-						<label for="state">State:</label>
-						<input type="text" name="state" id="state" placeholder="enter your State...">
-						<label for="zipcode">Zip code</label>
-                        <input type="text" id="zipcode" name="zipcode" placeholder="enter your zip code...">
+                        <label for="zipcode">Zip code</label>
+                        <input type="text" id="zipcode" name="zipcode" placeholder="enter your zip code..." class='zip-lookup-field-zipcode' />
+                        <label for="city">City:</label>
+					    <input type="text" name="city" id="city" placeholder="enter your City..." class='zip-lookup-field-city' />               
+                        <label for="state">State:</label>
+						<input type="text" name="state" id="state" maxlength="2" placeholder="enter your State Abbreviation..." class='zip-lookup-field-state-short' />		                        
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="choose a username...">
                         <label for="email">Email</label>
