@@ -2,6 +2,7 @@
 $barID = $_GET['id'];
 include(dirname(__DIR__).'/core/init_connect.php');
 // SQL query to fetch information of beer types and finds matches.
+$loaded = false;
 // for the bars table
 $barquery="SELECT Name, Address, City, State, ZipCode, PhoneNumber, Country 
     FROM dbtablebar 
@@ -29,6 +30,7 @@ foreach ($mapsearch_url ->result as $result)
     // if its in our database, list it
     if($result->name == $barName)  
     { 
+        $loaded = true;
         $placeID = $result->place_id;        
         //$photo=$result->photo;
         $photo_reference = $result->photo[0]->photo_reference;
@@ -38,8 +40,8 @@ foreach ($mapsearch_url ->result as $result)
             <div style="width:575px; height=:375px;">
             <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
             </div>
-            ';
-    } 
+            '; break;
+    }
 }
 // google places detail api
 $map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";

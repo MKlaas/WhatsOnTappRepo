@@ -23,21 +23,14 @@ echo "<h4>Bars Within <strong> " . $address ." </strong></h4>";
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT BarID, Name FROM dbtablebar";
+$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%'";
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);
 
   //-create  while loop and loop through result set
-
-  while($row=mysql_fetch_array($sqlresult)){
-       //$barName=$row['Name','BarID'];
+  while($row=mysql_fetch_array($sqlresult))
+  {
           $barName[]=$row['Name'];
-          //$barID[]=$row['BarID'];
-          //$barIDD=$row['BarID'];
-          $state = $row['State'];
-          //echo "<ul>\n";
-           //echo "<li>" . "<a  href=\"barpage.php?id=$barID\">"   .$barName . " " . $barIDD . "</a></li>\n";
-		  //echo "</ul>";
   }
  
 $divid = 1; // set this to increment in loop giving each div a unique id
@@ -54,6 +47,22 @@ foreach ($xml->result as $result)
     $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
+    
+// Explode formatted address and give it to multiple variables
+$zipExplode = explode(',', $zip);
+
+
+// formatted address values, dont need most of these.
+//$name = mysql_real_escape_string($zipValues[0]);
+//$address = mysql_real_escape_string($zipValues[1]);
+//$city = mysql_real_escape_string($zipValues[2]);
+$zipValue = mysql_real_escape_string($zipExplode[2]);
+//$country = mysql_real_escape_string($zipValues[4]);
+//$zipcode = mysql_real_escape_string($zipValues);
+$finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8];    
+ 
+
+    
     // photo reference requires separate google places api call to generate image
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
@@ -72,25 +81,43 @@ foreach ($xml->result as $result)
       // get barid from barname if in the the database, use id for url endpoint
 	if(in_array($result->name, $barName))
 	{
+        
         $barNameValue = mysql_real_escape_string($result->name);
+  
+        // get the Bar ID that corresponds to the bar name and zipcode here.
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
-            WHERE Name= '$barNameValue'";
+            WHERE Name= '$barNameValue' AND ZipCode = '$finalZipcode'";
         $barIDResult=mysql_query($barIDQuery);
         $barIDRows = mysql_num_rows($barIDResult);
-        
+        // get values of id
         while($row=mysql_fetch_array($barIDResult)){
        //$barName=$row['Name','BarID'];
           $barIDValue=$row['BarID'];
         }
-          
-		echo isset($result->name) ? "<h4><a href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";
+
+        // then display the bar names in blue as a bar we have in the database
+
+            if($barIDValue == null)
+            {
+                echo "<div style='float:right; font-size:200%;'><a href='addbar.php?n=".urlencode($name)."&a=".urlencode($zip)."'>+</a></div>";
+                echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
+                
+            }
+            elseif($barIDValue != null)
+            {
+                echo isset($result->name) ? "<h4><a href=\"barpage.php?id=$barIDValue\">" . $result->name . "</a></h4>" : "-<br/>";     
+            }
+           
+           // reset bar id so it doesnt carry a value over to the next bar
+           $barIDValue = null;
 	       
     }
 	
 	else 
 	{
-		echo "<div style='float:right; font-size:200%;'><a href='addbar.php?n=$name'>+</a></div>";
+        
+		echo "<div style='float:right; font-size:200%;'><a href='addbar.php?n=".urlencode($name)."&a=".urlencode($zip)."'>+</a></div>";
 		echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
 	
 	}

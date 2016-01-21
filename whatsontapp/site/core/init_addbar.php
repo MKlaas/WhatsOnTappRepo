@@ -20,8 +20,9 @@ $state = mysql_real_escape_string($searchTextFieldArray[3]);
 $country = mysql_real_escape_string($searchTextFieldArray[4]);
 $zipcode = mysql_real_escape_string($zipTextField);
 
+
 $sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country, zipcode) 
-VALUES ('$name', '$address', '$city', '$state', '$country', '$zipcode')";
+VALUES ('$name', '$address', '$city', '".$state[1].$state[2]."', '$country', '$zipcode')";
 $retval_bar = mysql_query( $sql_bar, $connection );
 global $barID;
 $barID = mysql_insert_id();
@@ -47,11 +48,13 @@ if(isset($_POST['Add']))
 }
 else 
 {
+    $name = $_GET['n'];
+    $address = $_GET['a'];
     echo '  <form action="#" method="post">
     <p>
      <label for="searchTextField">Please insert an address:</label>
-     <input id="searchTextField" name="searchTextField" type="text" size="100">
-     <input id="zip_code" name="zip_code" type="text" size="12">
+     <input id="searchTextField" name="searchTextField" type="text" size="100" value="'.urldecode($name).' '.urldecode($address).'">
+     <input style="display:none;" id="zip_code" name="zip_code" type="text" size="12">
   
    </p>
     <div id="map_canvas"></div> 

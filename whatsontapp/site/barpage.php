@@ -36,7 +36,11 @@
       <?php
       include('includes/navbar.php'); 
       ?>
-<?php include('core/init_barpage.php'); ?> 
+<?php include('core/init_barpage.php'); if($loaded == false)
+{
+    echo "<p style='color:red; text-align:center;'>Sorry we are having trouble loading info for ".$barName." at ".$barAddress." , " . $barZipCode .".<br/> Please check the information and try to add it again. If you're positive this is the info, <a href=''> contact us </a> to let us know! </p>";
+    echo "<script> /*";
+} ?> 
       <!-- Page Content -->
       <div class="container">
        
