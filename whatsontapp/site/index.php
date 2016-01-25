@@ -31,12 +31,10 @@
         <![endif]-->
 
     </head>
-    <br>
 
     <?php
     include('includes/navbar.php'); 
     ?>
-
 
 
     <!-- Header Carousel -->
@@ -91,6 +89,7 @@
 				<h2>
 				Top trending beers in your area!
 				</h2>
+
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
@@ -188,10 +187,11 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; What's on Tapp! 2015</p>
+                    <?php include('includes/footer.php'); ?>
                 </div>
             </div>
         </footer>
+
 
     </div>
     <!-- /.container -->

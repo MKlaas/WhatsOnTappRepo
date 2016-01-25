@@ -88,7 +88,7 @@ include('core/init_services.php');
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; What's on Tapp! 2015</p>
+                    <?php include('includes/footer.php'); ?>
                 </div>
             </div>
         </footer>

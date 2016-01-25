@@ -135,6 +135,7 @@
             <div id="myTabContent" class="tab-content">
                 <div class="tab-pane fade active in" id="service-one">
                     <h4>List of Drinks</h4>
+
                     <?php include('core/init_barpage_drinklist.php'); ?> 
                  </div>
                  <!-- maybe later
@@ -166,13 +167,13 @@
     <hr>
 
     <!-- Footer -->
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <p>Copyright &copy; What's on Tapp! 2015</p>
+         <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <?php include('includes/footer.php'); ?>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
 </div>
 <!-- /.container -->

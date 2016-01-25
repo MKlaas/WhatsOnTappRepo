@@ -93,4 +93,11 @@
   <body>
       <?php include('core/init_addbar.php'); ?>
   </body>
+          <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <?php include('includes/footer.php'); ?>
+                </div>
+            </div>
+        </footer>
 </html>

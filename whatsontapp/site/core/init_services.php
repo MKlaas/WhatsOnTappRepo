@@ -27,11 +27,11 @@ $sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$addres
 $sqlresult=mysql_query($sqlquery);
 $rows = mysql_num_rows($sqlresult);
 
-  //-create  while loop and loop through result set
-  while($row=mysql_fetch_array($sqlresult))
-  {
-          $barName[]=$row['Name'];
-  }
+//-create  while loop and loop through result set
+while($row=mysql_fetch_array($sqlresult))
+{
+        $barName[]=$row['Name'];
+}
  
 $divid = 1; // set this to increment in loop giving each div a unique id
 
@@ -47,22 +47,22 @@ foreach ($xml->result as $result)
     $zip = $result->formatted_address;
 	$photo=$result->photo;
 	$photo_reference = $result->photo->photo_reference;
+        
+    // Explode formatted address and give it to multiple variables
+    $zipExplode = explode(',', $zip);
+
+
+    // formatted address values, dont need most of these.
+    //$name = mysql_real_escape_string($zipValues[0]);
+    //$address = mysql_real_escape_string($zipValues[1]);
+    //$city = mysql_real_escape_string($zipValues[2]);
+    $zipValue = mysql_real_escape_string($zipExplode[2]);
+    //$country = mysql_real_escape_string($zipValues[4]);
+    //$zipcode = mysql_real_escape_string($zipValues);
+    $finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8];    
     
-// Explode formatted address and give it to multiple variables
-$zipExplode = explode(',', $zip);
 
-
-// formatted address values, dont need most of these.
-//$name = mysql_real_escape_string($zipValues[0]);
-//$address = mysql_real_escape_string($zipValues[1]);
-//$city = mysql_real_escape_string($zipValues[2]);
-$zipValue = mysql_real_escape_string($zipExplode[2]);
-//$country = mysql_real_escape_string($zipValues[4]);
-//$zipcode = mysql_real_escape_string($zipValues);
-$finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8];    
- 
-
-    
+        
     // photo reference requires separate google places api call to generate image
 	$image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxheight=140&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
@@ -97,8 +97,7 @@ $finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8]
         }
 
         // then display the bar names in blue as a bar we have in the database
-
-            if($barIDValue == null)
+        if($barIDValue == null)
             {
                 echo "<div style='float:right; font-size:200%;'><a href='addbar.php?n=".urlencode($name)."&a=".urlencode($zip)."'>+</a></div>";
                 echo isset($result->name) ? "<h4>" . $result->name . "</h4>" : "-<br/>";
@@ -110,7 +109,7 @@ $finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8]
             }
            
            // reset bar id so it doesnt carry a value over to the next bar
-           $barIDValue = null;
+        $barIDValue = null;
 	       
     }
 	

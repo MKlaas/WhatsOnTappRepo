@@ -64,7 +64,7 @@ include('includes/navbar.php');
 	
 
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>"> <!-- notice the updated action -->
+<form method="post" action="<?php echo $_SERVER["PHP_SELF"] . '?'.http_build_query($_GET); ?>"> <!-- notice the updated action -->
 <input  type="text" name="address">
  <input  type="submit" name="address_submit_button" value="Search Bars By Zipcode ">
 </form>
@@ -84,7 +84,7 @@ include('core/init_search_service.php');
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; What's on Tapp! 2015</p>
+                    <?php include('includes/footer.php'); ?>
                 </div>
             </div>
         </footer>

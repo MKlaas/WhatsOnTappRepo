@@ -22,7 +22,7 @@ else
         {
         $name=$_POST['name'];
         $api_key = "6dab466c8f0979f11e35908c1b6671ff";
-        
+
         // brewerydb api
         $brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
 
@@ -84,8 +84,8 @@ include(dirname(__DIR__).'/core/init_connect.php');
 $barID = $_GET['brid'];
 $brewerydb_id_value = $_GET['beid'];
     
-    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID) 
-    VALUES ('$brewerydb_id_value', '$barID')";
+    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID, Date) 
+    VALUES ('$brewerydb_id_value', '$barID', CURDATE())";
     $retval_barbeer = mysql_query($sql_barbeer, $connection);
     if(! $retval_barbeer )
     {
