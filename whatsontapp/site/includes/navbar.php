@@ -6,7 +6,7 @@ include('./account/core/init_profile.php');
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container" >
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -16,7 +16,7 @@ include('./account/core/init_profile.php');
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.php" >What's on Tapp</a>
-				<marquee direction="left" style="float: right; width; 200px;margin-left: 189px;"><p style="float:right;margin-left:375px;margin-top:12px;text-transform:uppercase;font-weight:bold;font-family:courier new;color:white;text-shadow: 2px 2px #ff0000;"><i><?php echo $login_session; ?><i><p></marquee>
+				<p style="float:right;margin-left:350px;margin-top:12px;text-transform:uppercase;font-weight:bold;font-family:courier new;color:lightblue;"><i>Welcome, <?php echo $login_session; ?>!</i></p>
             </div>
 					
 		
@@ -39,3 +39,5 @@ include('./account/core/init_profile.php');
         </div>
         <!-- /.container -->
     </nav>
+	
+	
