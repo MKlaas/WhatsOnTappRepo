@@ -181,7 +181,7 @@
             </div>
         </div>
 
-        <hr>
+        
 
         <!-- Footer -->
         <footer>
