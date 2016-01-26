@@ -19,18 +19,18 @@ $password = $_POST['password'];
  $sql = "INSERT INTO dbtableuser (username, firstname, lastname, city, state, zipcode, email, password) 
 		VALUES ('$username','$firstname', '$lastname', '$city', '$state', '$zipcode', '$email',sha1('$password'))";
 	  
-   $retval = mysql_query( $sql, $connection );
+   $retval = mysqli_query( $connection, $sql  ) or die('Could not look up user information; ' . mysqli_error($connection));;
    
    if(! $retval )
    {
-      die('Something Went Wrong: ' . mysql_error());
+      die('Something Went Wrong: ' . mysqli_error());
    }
-   
-   echo "Thanks For Registering \n <br/> You may now <a href='/whatsontapprepo/whatsontapp/site/account/login.php'>Login</a>";
+   echo "<script>setTimeout(function(){window.location.href='../login.php'},2000);</script>";   
+   echo "Thanks For Registering \n <br/> You Will Be Redirected, If Not Click <a href='../login.php'>Login</a>";
    
  
 // Close connection
-mysql_close($connection);
+mysqli_close($connection);
  }
 function UpdateUser()
 {
@@ -49,14 +49,15 @@ $password = $_POST['password'];
 		SET FirstName='$firstname', LastName='$lastname', City ='$city', State= '$state', ZipCode = '$zipcode', email='$email'
 		WHERE UserName = '$username'";
 
-   $retval = mysql_query( $sql, $connection );
+   $retval = mysqli_query( $connection,$sql  ) or die('Could not look up user information; ' . mysqli_error($connection));;
    
    if(! $retval )
    {
-      die('Something Went Wrong: ' . mysql_error());
+      die('Something Went Wrong: ' . mysqli_error());
    }
    
-   echo "Update Successful \n";
+   echo "<script>setTimeout(function(){window.location.href='../../index.php'},2000);</script>";   
+   echo "Update Successful, You May Go Back To The Main <a href='../../index.php'>Page</a> \n";
    
 
 }

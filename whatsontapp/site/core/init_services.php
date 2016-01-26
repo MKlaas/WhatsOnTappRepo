@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-include('account\core\init_profile.php'); 
+include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
 if ($_POST['address_submit_button']) {
 
@@ -24,11 +23,13 @@ include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
 $sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%'";
-$sqlresult=mysql_query($sqlquery);
-$rows = mysql_num_rows($sqlresult);
+
+$sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
+
+$rows = mysqli_num_rows($sqlresult);
 
 //-create  while loop and loop through result set
-while($row=mysql_fetch_array($sqlresult))
+while($row=mysqli_fetch_array($sqlresult))
 {
         $barName[]=$row['Name'];
 }
@@ -53,12 +54,12 @@ foreach ($xml->result as $result)
 
 
     // formatted address values, dont need most of these.
-    //$name = mysql_real_escape_string($zipValues[0]);
-    //$address = mysql_real_escape_string($zipValues[1]);
-    //$city = mysql_real_escape_string($zipValues[2]);
-    $zipValue = mysql_real_escape_string($zipExplode[2]);
-    //$country = mysql_real_escape_string($zipValues[4]);
-    //$zipcode = mysql_real_escape_string($zipValues);
+    //$name = mysqli_real_escape_string($zipValues[0]);
+    //$address = mysqli_real_escape_string($zipValues[1]);
+    //$city = mysqli_real_escape_string($zipValues[2]);
+    $zipValue = mysqli_real_escape_string($connection,$zipExplode[2]);
+    //$country = mysqli_real_escape_string($zipValues[4]);
+    //$zipcode = mysqli_real_escape_string($zipValues);
     $finalZipcode = $zipValue[4].$zipValue[5].$zipValue[6].$zipValue[7].$zipValue[8];    
     
 
@@ -82,16 +83,17 @@ foreach ($xml->result as $result)
 	if(in_array($result->name, $barName))
 	{
         
-        $barNameValue = mysql_real_escape_string($result->name);
+        $barNameValue = mysqli_real_escape_string($connection, $result->name);
   
         // get the Bar ID that corresponds to the bar name and zipcode here.
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
             WHERE Name= '$barNameValue' AND ZipCode = '$finalZipcode'";
-        $barIDResult=mysql_query($barIDQuery);
-        $barIDRows = mysql_num_rows($barIDResult);
+        $barIDResult = mysqli_query( $connection,$barIDQuery) or die('Could not look up bar information; ' . mysqli_error($connection));
+        
+        $barIDRows = mysqli_num_rows($barIDResult);
         // get values of id
-        while($row=mysql_fetch_array($barIDResult)){
+        while($row=mysqli_fetch_array($barIDResult)){
        //$barName=$row['Name','BarID'];
           $barIDValue=$row['BarID'];
         }
@@ -132,5 +134,5 @@ foreach ($xml->result as $result)
 }
 echo '</div>';
 
-mysql_close($connection); // Closing Connection
+mysqli_close($connection); // Closing Connection
   ?>

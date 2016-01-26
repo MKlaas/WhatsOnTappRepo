@@ -27,10 +27,10 @@ include('./account/core/init_profile.php');
                         <a href="services.php">Services</a>
                     </li>
 					<li>
-                        <a href="/whatsontapprepo/whatsontapp/site/account/register/update.php">Update Info</a>
+                        <a href="account/register/update.php">Update Info</a>
                     </li>
 					<li>
-                        <a href="/whatsontapprepo/whatsontapp/site/account/logout.php">Logout</a>
+                        <a href="account/logout.php">Logout</a>
                     </li>
 			
                 </ul>

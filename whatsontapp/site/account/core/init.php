@@ -13,17 +13,17 @@ $password=$_POST['form-password'];
 
 // Connection
 include(dirname(__DIR__).'../../core/init_connect.php');
-
+$query = "select * from dbtableuser where Password=sha1('$password') AND UserName='$username'";
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("select * from dbtableuser where Password=sha1('$password') AND UserName='$username'", $connection);
-$rows = mysql_num_rows($query);
+$ret_query = mysqli_query($connection, $query) or die('Could not look up user information. ' . mysqli_error($connection));;
+$rows = mysqli_num_rows($ret_query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
 header("location: ../index.php"); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
 }
-mysql_close($connection); // Closing Connection
+mysqli_close($connection); // Closing Connection
 }
 }
 

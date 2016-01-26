@@ -5,7 +5,7 @@ $barID = $_GET['id'];
 {
     $barID = $_GET['brid'];
     addBeer();
-    echo "<script>setTimeout(function(){window.location.href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},3000);</script>";
     echo "</head>";
     
 }
@@ -86,16 +86,16 @@ $brewerydb_id_value = $_GET['beid'];
     
     $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID, Date) 
     VALUES ('$brewerydb_id_value', '$barID', CURDATE())";
-    $retval_barbeer = mysql_query($sql_barbeer, $connection);
+    $retval_barbeer = mysqli_query($connection ,$sql_barbeer ) or die('Could not insert bar beer information; ' . mysqli_error($connection));;
     if(! $retval_barbeer )
     {
-        die('Could not enter data: ' . mysql_error());
+        die('Could not enter data: ' . mysqli_error());
     } 
     else
     {
-        echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>bar</a>";
+        echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='barpage.php?id=".$barID."'>bar</a>";
     }
-    mysql_close($connection);
+    mysqli_close($connection);
     
    }
 ?>

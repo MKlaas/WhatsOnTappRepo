@@ -16,18 +16,13 @@ function updateBeer()
     // do query
     
     // redirect back to bar
-$retval_barbeer_update = mysql_query( $sql_barbeer_update, $connection );
+$retval_barbeer_update = mysqli_query( $connection,$sql_barbeer_update ) or die('Could not update barbeer information; ' . mysqli_error($connection));;
 
-
-if(! $retval_barbeer_update )
-{
-  die('Could not enter barbeer data: ' . mysql_error());  
-}
-echo  "<script>setTimeout(function(){window.location.href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
+echo  "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},3000);</script>";
 echo "<p>Thanks, for letting us know, we'll update the bar now!</p>";
-echo "<p>If you get lost go <a href = '/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>here</a>.</p>";
+echo "<p>If you get lost go <a href = 'barpage.php?id=".$barID."'>here</a>.</p>";
 
-mysql_close($connection);
+mysqli_close($connection);
 }
 
 

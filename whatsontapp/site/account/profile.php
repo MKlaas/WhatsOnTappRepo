@@ -16,9 +16,9 @@ border-color:black;padding-top:10px;">
 <ul style="display: block;">
 <b id="welcome"class="button">Welcome! <i ><?php echo $login_session; ?></i></b>
 <a href="../index.php"class="button">Go To Main Page </a>
-<b id="update" ><a href="/whatsontapprepo/whatsontapp/site/account/register/update.php"class="button">Update Info</a></b>
-<b id="profile" ><a href="/whatsontapprepo/whatsontapp/site/account/profile.php"class="button">Profile</a></b>
-<b id="logout" ><a href="/whatsontapprepo/whatsontapp/site/account/logout.php" class="button">Log Out</a></b>
+<b id="update" ><a href="register/update.php"class="button">Update Info</a></b>
+<b id="profile" ><a href="profile.php"class="button">Profile</a></b>
+<b id="logout" ><a href="logout.php" class="button">Log Out</a></b>
 <ul>
 
 <style>

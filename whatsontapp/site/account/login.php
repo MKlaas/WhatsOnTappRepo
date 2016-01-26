@@ -1,7 +1,8 @@
 <?php
 include('core/init.php'); // Includes Login Script
 
-if(isset($_SESSION['login_user'])){
+if(isset($_SESSION['login_user']))
+{
 }
 ?>
 <!DOCTYPE html>

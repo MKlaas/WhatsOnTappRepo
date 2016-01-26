@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if(!isset($_SESSION['login_user'])){
+   //redirect or other you want
+   header("Location: account/login.php"); // Redirecting To Home Page
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -93,11 +101,4 @@
   <body>
       <?php include('core/init_addbar.php'); ?>
   </body>
-          <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php include('includes/footer.php'); ?>
-                </div>
-            </div>
-        </footer>
 </html>

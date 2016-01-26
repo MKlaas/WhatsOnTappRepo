@@ -13,38 +13,38 @@ $zipTextField = $_POST['zip_code'];
 $beerTextField = $_POST['beerTextField'];
 
 // bar info
-$name = mysql_real_escape_string($searchTextFieldArray[0]);
-$address = mysql_real_escape_string($searchTextFieldArray[1]);
-$city = mysql_real_escape_string($searchTextFieldArray[2]);
-$state = mysql_real_escape_string($searchTextFieldArray[3]);
-$country = mysql_real_escape_string($searchTextFieldArray[4]);
-$zipcode = mysql_real_escape_string($zipTextField);
+$name = mysqli_real_escape_string($connection, $searchTextFieldArray[0]);
+$address = mysqli_real_escape_string($connection, $searchTextFieldArray[1]);
+$city = mysqli_real_escape_string($connection, $searchTextFieldArray[2]);
+$state = mysqli_real_escape_string($connection, $searchTextFieldArray[3]);
+$country = mysqli_real_escape_string($connection, $searchTextFieldArray[4]);
+$zipcode = mysqli_real_escape_string($connection, $zipTextField);
 
 
 $sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country, zipcode) 
 VALUES ('$name', '$address', '$city', '".$state[1].$state[2]."', '$country', '$zipcode')";
-$retval_bar = mysql_query( $sql_bar, $connection );
+$retval_bar = mysqli_query( $connection, $sql_bar ) or die('Could not insert bar information; ' . mysqli_error($connection));;
 global $barID;
-$barID = mysql_insert_id();
+$barID = mysqli_insert_id($connection);
 
 
 if(! $retval_bar )
 {
-  die('Could not enter bar data: ' . mysql_error());  
+  die('Could not enter bar data: ' . mysqli_error());  
 }
 
 echo "<p>Thanks, follow us to the bar!</p>";
-echo "<p>If you get lost go <a href = '/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'>here</a>.</p>";
+echo "<p>If you get lost go <a href = 'barpage.php?id=".$barID."'>here</a>.</p>";
 
 // Close connection
-mysql_close($connection);    
+mysqli_close($connection);    
 }
 
 // get html add attribute, if value is posted run the addbar function and redirect
 if(isset($_POST['Add']))
 {
     addBar();
-    echo "<script>setTimeout(function(){window.location.href='/whatsontapprepo/whatsontapp/site/barpage.php?id=".$barID."'},3000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},3000);</script>";
 }
 else 
 {
@@ -61,7 +61,7 @@ else
     <input type="submit" name="Add" value="Add">
 
  </form>
- <form action="/whatsontapprepo/whatsontapp/site/services.php">
+ <form action="../services.php">
   <input type="submit" value="Go Back">
 </form>';
 }

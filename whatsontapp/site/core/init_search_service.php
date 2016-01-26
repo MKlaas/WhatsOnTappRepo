@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-include('account\core\init_profile.php'); 
+include(dirname(__DIR__).'/account/core/init_profile.php');
 $address = $zip;
 if ($_POST['address_submit_button']) {
 
@@ -28,12 +27,14 @@ FROM dbtablebar a, dbtablebarbeer b
 WHERE a.BarID=b.BarID 
 AND b.BeerID = '$beerID'";
 
-$sqlresult=mysql_query($sqlquery);
-$rows = mysql_num_rows($sqlresult);
+
+$sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not get bar, beer information; ' . mysqli_error($connection));
+
+$rows = mysqli_num_rows($sqlresult);
 
 $barName=array();
   //-create  while loop and loop through result set
-  while($row=mysql_fetch_array($sqlresult)){
+  while($row=mysqli_fetch_array($sqlresult)){
 	  // select the index from a.name,
           $barName[]=$row[0];
   }
@@ -57,14 +58,14 @@ foreach ($xml ->result as $result)
     // get the bar id of the bar name to place as the id to hyperlinks to use in url later
     if(in_array($result->name, $barName))
 	{
-        $barNameValue = mysql_real_escape_string($result->name);
+        $barNameValue = mysqli_real_escape_string($connection, $result->name);
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
             WHERE Name= '$barNameValue'";
-        $barIDResult=mysql_query($barIDQuery);
-        $barIDRows = mysql_num_rows($barIDResult);
+        $barIDResult = mysqli_query( $connection,$barIDQuery) or die('Could not get bar information; ' . mysqli_error($connection)); 
+        $barIDRows = mysqli_num_rows($barIDResult);
         
-        while($row=mysql_fetch_array($barIDResult)){
+        while($row=mysqli_fetch_array($barIDResult)){
        //$barName=$row['Name','BarID'];
           $barIDValue=$row['BarID'];
         }
@@ -96,5 +97,5 @@ foreach ($xml ->result as $result)
 }
 echo '</div>';
 
-mysql_close($connection); // Closing Connection
+mysqli_close($connection); // Closing Connection
   ?>

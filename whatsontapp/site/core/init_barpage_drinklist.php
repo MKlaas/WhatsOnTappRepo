@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 // connection
 include(dirname(__DIR__).'/core/init_connect.php');
 
@@ -7,9 +8,10 @@ $barbeerquery="SELECT BeerID, Date
 FROM dbtablebarbeer
 WHERE BarID= $barID";
 
-$barbeerresult=mysql_query($barbeerquery);
-$rows = mysql_num_rows($barbeerresult);
-                           /*
+$barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
+$rows = mysqli_num_rows($barbeerresult);
+                           
+/*
      $now = time(); // or your date as well
      $your_date = strtotime("2016-01-01");
      $datediff = $now - $your_date;
@@ -17,7 +19,7 @@ $rows = mysql_num_rows($barbeerresult);
      */
 //$barName=array();
   //-create  while loop and loop through result set
-  while($row=mysql_fetch_array($barbeerresult)){
+  while($row=mysqli_fetch_array($barbeerresult)){
         $beerID = $row['BeerID'];
         $dbDate = strtotime($row['Date']);
         $now = time(); // or your date as well
@@ -29,7 +31,8 @@ $rows = mysql_num_rows($barbeerresult);
             $barbeerdeletequery="DELETE FROM dbtablebarbeer
                 WHERE Date < (CURDATE() - INTERVAL 180 DAY)";
 
-             mysql_query($barbeerdeletequery);
+            mysqli_query($connection, $barbeerdeletequery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
+             
             // way past current ,delete the barbeer entry
             $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago"; 
         }
@@ -73,7 +76,7 @@ $rows = mysql_num_rows($barbeerresult);
   }
   
 $beerTextField = $_POST['beerTextField'];
-$beerName= mysql_real_escape_string($beerTextField);
+$beerName= mysqli_real_escape_string($connection, $beerTextField);
 
 $api_key = "6dab466c8f0979f11e35908c1b6671ff";
 // brewerydb api searching for beer by name
@@ -90,6 +93,6 @@ $brewerydb_id = isset($brewerydb2_results -> id) ? $brewerydb2_results -> id  : 
                       </form>
                       <br/>';
 
-mysql_close($connection);    
+mysqli_close($connection);    
 ?>
 

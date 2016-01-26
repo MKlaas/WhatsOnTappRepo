@@ -7,11 +7,11 @@ $loaded = false;
 $barquery="SELECT Name, Address, City, State, ZipCode, PhoneNumber, Country 
     FROM dbtablebar 
     WHERE BarID = $barID";
-$barresult=mysql_query($barquery);
-$rows = mysql_num_rows($barresult);
+$barresult=mysqli_query($connection, $barquery) or die('Could not look up bar information ' . mysqli_error($connection));;
+$rows = mysqli_num_rows($barresult);
 
   //-create  while loop and loop through result set
-  while($row=mysql_fetch_array($barresult)){
+  while($row=mysqli_fetch_array($barresult)){
           $barName=$row['Name'];
           $barAddress=$row['Address'];
           $barCity=$row['City'];
@@ -62,5 +62,5 @@ foreach ($mapdetails_url ->result as $details_result)
 	$detailsWebsite = isset($details_result->website) ? '<br/><a href="'. $details_result->website .'">'. $details_result->website .'</a>': "-<br/>" ;
     
 }
-mysql_close($connection);    
+mysqli_close($connection);    
 ?>
