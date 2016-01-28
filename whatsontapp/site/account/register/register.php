@@ -69,6 +69,17 @@
                         <input type="text" id="" name="email" placeholder="enter your email...">
                         <label for="password">Password</label>
 						<input type="password" id="password" name="password" placeholder="choose a password...">
+                        <label for="secQ">Secret Question</label>
+						<select id="secQ" name="secQ">
+                            <option value="0">What is your mother's maiden name?</option>
+                            <option value="1">What city were you born in?</option>
+                            <option value="2">What is your favorite color?</option>
+                            <option value="3">What year did you graduate from High School?</option>
+                            <option value="4">Who is the coolest guy you know?</option>
+                            <option value="5">What is your favorite model of car?</option>
+                        </select><br>
+                        <label for="secA">Secret Answer</label>
+						<input type="text" id="secA" name="secA" placeholder="enter an answer">
                         <button type="submit" name="insert">REGISTER</button>
 						<?php 
 						include('../core/init_register-update.php');

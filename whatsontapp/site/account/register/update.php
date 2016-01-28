@@ -15,7 +15,7 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700'>
         <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-
+        <script src="http://ziplookup.googlecode.com/git/zip-lookup/zip-lookup.min.js" type="text/javascript" ></script>
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -52,24 +52,35 @@
                 </div>
                 <div class="register span6" style="margin-right: 80px; margin-left: 250px;">
                     <form action="" method="post">
-                        <h2>Update your account for <span class="red"><strong>Tapp</strong></span></h2>
+                        <h2>REGISTER for <span class="red"><strong>Tapp</strong></span></h2>
                         <label for="firstname">First Name</label>
                         <input type="text" id="firstname" name="firstname" placeholder="enter your first name...">
                         <label for="lastname">Last Name</label>
 						<input type="text" id="lasttname" name="lastname" placeholder="enter your Last name...">
-						<label for="city">City:</label>
-						<input type="text" name="city" id="city" placeholder="enter your City...">
-						<label for="state">State:</label>
-						<input type="text" name="state" id="state" placeholder="enter your State...">
-						<label for="zipcode">Zip code</label>
-                        <input type="text" id="zipcode" name="zipcode" placeholder="enter your zip code...">
+                        <label for="zipcode">Zip code</label>
+                        <input type="text" id="zipcode" name="zipcode" placeholder="enter your zip code..." class='zip-lookup-field-zipcode' />
+                        <label for="city">City:</label>
+					    <input type="text" name="city" id="city" placeholder="enter your City..." class='zip-lookup-field-city' />               
+                        <label for="state">State:</label>
+						<input type="text" name="state" id="state" maxlength="2" placeholder="enter your State Abbreviation..." class='zip-lookup-field-state-short' />		                        
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="choose a username...">
                         <label for="email">Email</label>
                         <input type="text" id="" name="email" placeholder="enter your email...">
                         <label for="password">Password</label>
 						<input type="password" id="password" name="password" placeholder="choose a password...">
-                        <button type="submit" name="insert">Update Info</button>
+                        <label for="secQ">Secret Question</label>
+						<select id="secQ" name="secQ">
+                            <option value="0">What is your mother's maiden name?</option>
+                            <option value="1">What city were you born in?</option>
+                            <option value="2">What is your favorite color?</option>
+                            <option value="3">What year did you graduate from High School?</option>
+                            <option value="4">Who is the coolest guy you know?</option>
+                            <option value="5">What is your favorite model of car?</option>
+                        </select><br>
+                        <label for="secA">Secret Answer</label>
+						<input type="text" id="secA" name="secA" placeholder="enter an answer">
+                        <button type="submit" name="insert">REGISTER</button>
 						<?php 
 						include('../core/init_register-update.php');
 						if(isset($_POST['insert'])){

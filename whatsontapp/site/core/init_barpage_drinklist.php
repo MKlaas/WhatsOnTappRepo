@@ -19,6 +19,7 @@ $rows = mysqli_num_rows($barbeerresult);
      */
 //$barName=array();
   //-create  while loop and loop through result set
+  $api_key = "a4fd41003198b446f6ee46d9ea309a21";
   while($row=mysqli_fetch_array($barbeerresult)){
         $beerID = $row['BeerID'];
         $dbDate = strtotime($row['Date']);
@@ -63,7 +64,8 @@ $rows = mysqli_num_rows($barbeerresult);
                 $lastseen = " seen <font style='color:green;'>".$dayscount."</font> days ago"; 
             }
         }
-        $beer_details_url = "https://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries=y&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
+        
+        $beer_details_url = "https://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries=y&key=".$api_key."&format=xml";
         $api_url=simplexml_load_file($beer_details_url);
         $brewerydb_results = $api_url-> data -> item;
         $brewerydb_name = isset($brewerydb_results -> name) ? $brewerydb_results -> name  : "-"; 
@@ -78,7 +80,6 @@ $rows = mysqli_num_rows($barbeerresult);
 $beerTextField = $_POST['beerTextField'];
 $beerName= mysqli_real_escape_string($connection, $beerTextField);
 
-$api_key = "6dab466c8f0979f11e35908c1b6671ff";
 // brewerydb api searching for beer by name
 $brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$beerName."&p=1&key=".$api_key."&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);

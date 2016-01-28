@@ -14,7 +14,7 @@ if(isset($_SESSION['login_user']))
                               <meta http-equiv="X-UA-Compatible" content="IE=edge">
                                                                                    <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Welcome To What's on Tapp!</title>
-
+            
         <!-- CSS -->
                     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
                          <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -47,6 +47,7 @@ if(isset($_SESSION['login_user']))
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
                             <h1><strong>What's on Tapp!</strong></h1>
+                            (A Work In Progress!)
                             <div class="description">
                             </div>
                         </div>

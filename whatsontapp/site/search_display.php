@@ -53,10 +53,9 @@ $error = "Please enter name or style";
 $name=$_POST['name'];
 
 // load api url into xml reader
-$api_key = "6dab466c8f0979f11e35908c1b6671ff";
+$api_key = "a4fd41003198b446f6ee46d9ea309a21";
 $brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";
 
-//https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=headhunter&p=1&key=6dab466c8f0979f11e35908c1b6671ff&format=xml
 
 $api_url=simplexml_load_file($brewerydb_api_url);
 
