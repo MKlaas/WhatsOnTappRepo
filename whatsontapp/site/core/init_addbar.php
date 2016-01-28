@@ -53,7 +53,7 @@ else
     echo '  <form action="#" method="post">
     <p>
      <label for="searchTextField">Please insert an address:</label>
-     <input id="searchTextField" name="searchTextField" type="text" size="100" value="'.urldecode($name).' '.urldecode($address).'">
+     <input id="searchTextField" name="searchTextField" type="text" size="100" value="'.urldecode($name).', '.urldecode($address).'">
      <input style="display:none;" id="zip_code" name="zip_code" type="text" size="12">
   
    </p>
@@ -61,7 +61,7 @@ else
     <input type="submit" name="Add" value="Add">
 
  </form>
- <form action="../services.php">
+ <form action="services.php">
   <input type="submit" value="Go Back">
 </form>';
 }
