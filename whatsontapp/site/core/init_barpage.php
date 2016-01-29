@@ -3,6 +3,24 @@ $barID = $_GET['id'];
 include(dirname(__DIR__).'/core/init_connect.php');
 // SQL query to fetch information of beer types and finds matches.
 $loaded = false;
+
+$viewed = 0;
+//if no such session exists, assume that its their first time viewing.
+if(!isset($_SESSION[$viewed.'_v'])){
+
+// update click variable in db
+$barClicked =" UPDATE dbtablebar 
+    SET clicked = clicked + 1
+    WHERE BarID = '$barID'";
+    
+$barClickedresult=mysqli_query($connection, $barClicked) or die('Could not update bar click ' . mysqli_error($connection));;
+
+    //set session variable saying they've viewed this institutions page.
+    $_SESSION[$viewed.'_v'] = 1;
+
+}
+
+
 // for the bars table
 $barquery="SELECT Name, Address, City, State, ZipCode, PhoneNumber, Country 
     FROM dbtablebar 

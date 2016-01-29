@@ -97,11 +97,13 @@ if(!isset($_SESSION['login_user'])){
                     What's on tap is designed to be your easy access window to the bar world. As a user you may add bars and beers in your area so that other users may know! <br/>Future things to come: Adding your own reviews to both the beer and bar, seeing top rated beers in your area, seeing most visited bar in your area, seeing trending beers. Bar owners acting as admin for their bar page and keeping up to date.
                     </p>
 				<h2>
-				Top trending beers in your area!
+				Trending Beers In Your Area!
 				</h2>
 
             </div>
-            <div class="col-md-4">
+            <?php include('core/init_index_trendingbeers.php'); ?>
+            
+            <!-- <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4><i class="fa fa-fw fa-check"></i> Coming Soon</h4>
@@ -135,48 +137,18 @@ if(!isset($_SESSION['login_user'])){
                 </div>
             </div>
         </div>
+        -->
         <!-- /.row -->
 
         <!-- Portfolio Section -->
+        
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Other Incredible Choices</h2>
+                <h2 class="page-header">Bars Trending In Your Area!</h2>
             </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <a href="portfolio-item.html">
-                    <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                </a>
-            </div>
+            <?php include('core/init_index_trendingbars.php'); ?>
         </div>
         <!-- /.row -->
-
-
-
         <hr>
 
         <!-- Call to Action Section -->
