@@ -28,9 +28,17 @@ echo '<div class="row"> ';
 // go through xml file 
 foreach ($xml ->result as $result)
 {
+    
+      if(count(in_array($result->name, $barName)) <= 0)
+        {
+            
+            echo "<p> Hmm, No bars seem to be trending in this area. Get one started by adding your favorite bar!</p>"; break;
+        }
+    
     // get the bar id of the bar name to place as the id to hyperlinks to use in url later
     if(in_array($result->name, $barName))
 	{
+      
         $barNameValue = mysqli_real_escape_string($connection, $result->name);
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
@@ -38,7 +46,8 @@ foreach ($xml ->result as $result)
         $barIDResult = mysqli_query( $connection,$barIDQuery) or die('Could not get bar information; ' . mysqli_error($connection)); 
         $barIDRows = mysqli_num_rows($barIDResult);
         
-        while($row=mysqli_fetch_array($barIDResult)){
+        while($row=mysqli_fetch_array($barIDResult))
+        {
        //$barName=$row['Name','BarID'];
           $barIDValue=$row['BarID'];
         }
@@ -68,6 +77,7 @@ foreach ($xml ->result as $result)
 	}
 
 }
+
 echo '</div>';
 
 mysqli_close($connection); // Closing Connection
