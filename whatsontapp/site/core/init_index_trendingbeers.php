@@ -1,14 +1,16 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
+include(dirname(__DIR__).'/account/core/init_profile.php'); 
 // connection
 include(dirname(__DIR__).'/core/init_connect.php');
-
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery='SELECT BeerID, COUNT(BeerID) AS count 
-FROM dbtablebarbeer 
+$barbeerquery='SELECT a.BeerID , COUNT(a.BeerID) AS count 
+FROM dbtablebarbeer a, dbtablebar b
+WHERE a.BarID = b.BarID AND b.ZipCode LIKE "'.$zip[0].$zip[1].'%"
 GROUP BY BeerID 
 ORDER BY count DESC
-LIMIT 3';
+LIMIT 3
+';
 
 $barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
 $rows = mysqli_num_rows($barbeerresult);
@@ -31,7 +33,7 @@ $rows = mysqli_num_rows($barbeerresult);
         echo '<div class="panel-heading"><h4><font color="#377BB5">'.$brewerydb_name.'</font></h4></div>';
         echo '<div class="panel-body">
                        '.$brewerydb_icon.'
-                        <a href="beerinfo.php?id='.$beerID.'" class="btn btn-default">Learn More</a>
+                        <a href="beerpage.php?id='.$beerID.'" class="btn btn-default">Search For It!</a>
                     </div>';
         echo '</div>
             </div>';

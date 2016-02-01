@@ -34,6 +34,7 @@ else
         $brewerydb_id = isset($brewerydb_results -> id) ? "<p>" . $brewerydb_results -> id . "</p>" : "- <br/>";; 
         $brewerydb_id_value = isset($brewerydb_results -> id) ? $brewerydb_results -> id : NULL; 
         $brewerydb_name = isset($brewerydb_results -> name) ? "<p>" . $brewerydb_results -> name . "</p>" : "0"; 
+        $brewerydb_name_value = isset($brewerydb_results -> name) ? $brewerydb_results -> name : NULL; 
         $brewerydb_description = isset($brewerydb_results -> description) ? "<p>" . $brewerydb_results -> description . "</p>" : "<br/>-<br/>"; 
         $brewerydb_abv = isset($brewerydb_results -> abv) ? "<p>" . $brewerydb_results -> abv . "%</p>" : "-<br/>"; 
         $brewerydb_style = isset($brewerydb_results -> style -> shortName) ? "<p>" . $brewerydb_results -> style -> shortName . "</p>" : "-<br/>"; 
@@ -59,7 +60,7 @@ if($brewerydb_name == "0")
 else
 { 
  // succesfully got info, generate it   
-echo '<form action="addbeer.php?brid='.$barID.'&beid='.$brewerydb_id_value.'" method="post">
+echo '<form action="addbeer.php?brid='.$barID.'&beid='.$brewerydb_id_value.'&ben='.$brewerydb_name_value.'" method="post">
 <p>Is this the beer? Go ahead and add it!</p>
     <input type="submit" name="Add" value="Add" />
 </form>
@@ -84,9 +85,10 @@ include(dirname(__DIR__).'/core/init_connect.php');
 // grabbing url variables for query insert
 $barID = $_GET['brid'];
 $brewerydb_id_value = $_GET['beid'];
+$brewerydb_name_value = $_GET['ben'];
     
-    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerID, BarID, Date) 
-    VALUES ('$brewerydb_id_value', '$barID', CURDATE())";
+    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerName,BeerID, BarID, Date) 
+    VALUES ('$brewerydb_name_value','$brewerydb_id_value', '$barID', CURDATE())";
     $retval_barbeer = mysqli_query($connection ,$sql_barbeer ) or die('Could not insert bar beer information; ' . mysqli_error($connection));;
     if(! $retval_barbeer )
     {
