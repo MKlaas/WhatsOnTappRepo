@@ -57,9 +57,6 @@ include('includes/navbar.php');
         </div>
         <!-- /.row -->
 
- 
-		
-		  
 <div style="float:right;">
   <h3>Search Details</h3>
     <p>You  may search name or type</p>
@@ -87,8 +84,6 @@ include('includes/navbar.php');
 <?php
 include('core/init_services.php'); 
 ?>
- 
-
 
         <hr>
 

@@ -2,9 +2,11 @@
 error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
+$posted = FALSE;
 if ($_POST['address_submit_button']) {
 
     $address = $_POST['address'];
+    $posted = TRUE;
 
 }
 
@@ -23,7 +25,7 @@ echo "<h4>Bars Within <strong> " . $address ." </strong></h4>";
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%'";
+$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%' OR Name LIKE '%".$address."%'";
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
 
