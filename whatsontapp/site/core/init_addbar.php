@@ -58,6 +58,7 @@ else
   
    </p>
     <div id="map_canvas"></div> 
+    <br/><br/>
     <input type="submit" name="Add" value="Add">
 
  </form>

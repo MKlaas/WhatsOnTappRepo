@@ -7,7 +7,7 @@ $address = $zip;
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%' ORDER BY clicked DESC LIMIT 6";
+$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1].$address[2]."%' ORDER BY clicked DESC LIMIT 6";
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
 
@@ -29,11 +29,11 @@ echo '<div class="row"> ';
 foreach ($xml ->result as $result)
 {
     
-      if(count(in_array($result->name, $barName)) <= 0)
-        {
-            
-            echo "<p> Hmm, No bars seem to be trending in this area. Get one started by adding your favorite bar!</p>"; break;
-        }
+    if(count(in_array($result->name, $barName)) <= 0)
+    {
+        
+        echo "<p> Hmm, No bars seem to be trending in this area. Get one started by adding your favorite bar!</p>"; break;
+    }
     
     // get the bar id of the bar name to place as the id to hyperlinks to use in url later
     if(in_array($result->name, $barName))
