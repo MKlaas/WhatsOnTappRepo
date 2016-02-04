@@ -66,7 +66,7 @@ function checkSecAnswer($userID,$answer)
 	global $connection;
 	if ($SQL = $connection->prepare("SELECT `Username` FROM `dbtableuser` WHERE `AccountID` = ? AND LOWER(`secA`) = ? LIMIT 1"))
 	{
-		$answer = strtolower($answer);
+		$answer = sha1($answer);
 		$SQL->bind_param('is',$userID,$answer);
 		$SQL->execute();
 		$SQL->store_result();
