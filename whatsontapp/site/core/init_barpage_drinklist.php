@@ -4,9 +4,9 @@ error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery="SELECT BeerID, Date 
-FROM dbtablebarbeer
-WHERE BarID= $barID";
+$barbeerquery="SELECT a.BeerID, a.Date, b.UserName 
+FROM dbtablebarbeer a, dbtableuser b
+WHERE a.BarID= $barID AND a.AccountID = b.AccountID";
 
 $barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
 $rows = mysqli_num_rows($barbeerresult);
@@ -21,13 +21,14 @@ $rows = mysqli_num_rows($barbeerresult);
   //-create  while loop and loop through result set
   $api_key = "a4fd41003198b446f6ee46d9ea309a21";
   while($row=mysqli_fetch_array($barbeerresult)){
+        $userName = $row['UserName'];
         $beerID = $row['BeerID'];
         $dbDate = strtotime($row['Date']);
         $now = time(); // or your date as well
         $datediff = $now - $dbDate;
         $dayscount = floor($datediff/(60*60*24));
 
-        if($dayscount >= 180)
+        if($dayscount >= 120)
         {
             $barbeerdeletequery="DELETE FROM dbtablebarbeer
                 WHERE Date < (CURDATE() - INTERVAL 180 DAY)";
@@ -35,33 +36,33 @@ $rows = mysqli_num_rows($barbeerresult);
             mysqli_query($connection, $barbeerdeletequery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
              
             // way past current ,delete the barbeer entry
-            $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago"; 
+            $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
         }
-        elseif($dayscount >= 120)
+        elseif($dayscount >= 90)
         {
             // way past currentdelete the barbeer entry
-            $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago"; 
+            $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
         }
         elseif ($dayscount >= 60)
         {
             // font color is red, no longer current
-            $lastseen = " seen <font style='color:orange;'>".$dayscount."</font> days ago"; 
+            $lastseen = " seen <font style='color:orange;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
         }
         elseif($dayscount >= 30)
         {
             // font color is yellow needs updated
-            $lastseen = " seen <font style='color:GoldenRod;'>".$dayscount."</font> days ago"; 
+            $lastseen = " seen <font style='color:GoldenRod;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
         }
         else
         {
             if($dayscount == 0)
             {
                
-                $lastseen = " seen <font style='color:green;'>Today!</font>"; 
+                $lastseen = " seen <font style='color:green;'>Today!</font> by <font style='color:#337ab7'>".$userName."</font>"; 
             }
             else
             {
-                $lastseen = " seen <font style='color:green;'>".$dayscount."</font> days ago"; 
+                $lastseen = " seen <font style='color:green;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
             }
         }
         

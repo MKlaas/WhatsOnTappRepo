@@ -25,7 +25,7 @@ $barClickedresult=mysqli_query($connection, $barClicked) or die('Could not updat
 $barquery="SELECT Name, Address, City, State, ZipCode, PhoneNumber, Country 
     FROM dbtablebar 
     WHERE BarID = $barID";
-$barresult=mysqli_query($connection, $barquery) or die('Could not look up bar information ' . mysqli_error($connection));;
+$barresult=mysqli_query($connection, $barquery) or die('Could not look up bar information ' . mysqli_error($connection));
 $rows = mysqli_num_rows($barresult);
 
   //-create  while loop and loop through result set
@@ -54,7 +54,7 @@ foreach ($mapsearch_url ->result as $result)
         //$photo=$result->photo;
         $photo_reference = $result->photo[0]->photo_reference;
         $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-        $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : 
+        $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
             '
             <div style="width:575px; height=:375px;">
             <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
@@ -83,7 +83,7 @@ if($nextPage1 != "0")
             //$photo=$result1->photo;
             $photo_reference = $result1->photo[0]->photo_reference;
             $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-            $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : 
+            $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
                 '
                 <div style="width:575px; height=:375px;">
                 <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
@@ -113,7 +113,7 @@ if($nextPage2 != "0")
             //$photo=$result->photo;
             $photo_reference = $result->photo[0]->photo_reference;
             $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-            $detailsImage = isset($photo_reference) ? '<a href="'. $details_result->website.'"><image width="550" height="350" src="'. $image .'"</image></a>' : 
+            $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
                 '
                 <div style="width:575px; height=:375px;">
                 <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>

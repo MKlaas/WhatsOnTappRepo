@@ -50,10 +50,11 @@ else
 {
     $name = $_GET['n'];
     $address = $_GET['a'];
+    echo "You Selected <strong>".urldecode($name).", ".urldecode($address) . " </strong>";
     echo '  <form action="#" method="post">
     <p>
-     <label for="searchTextField">Please insert an address:</label>
-     <input id="searchTextField" name="searchTextField" type="text" size="100" value="'.urldecode($name).', '.urldecode($address).'">
+     <label for="searchTextField">Please insert name and address:</label>
+     <input id="searchTextField" name="searchTextField" type="text" size="100" placeholder="Find Location On The Map">
      <input style="display:none;" id="zip_code" name="zip_code" type="text" size="12">
   
    </p>

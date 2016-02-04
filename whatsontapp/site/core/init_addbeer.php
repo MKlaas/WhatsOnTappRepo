@@ -1,5 +1,5 @@
  <?php
-$barID = $_GET['id'];
+ $barID = $_GET['id'];
 // get add value if posted run add beer function and redirect
  if(isset($_POST['Add']))
 {
@@ -31,16 +31,16 @@ else
         $brewerydb_results = $api_url-> data -> item;
 
 // xml values to variable
-        $brewerydb_id = isset($brewerydb_results -> id) ? "<p>" . $brewerydb_results -> id . "</p>" : "- <br/>";; 
+        $brewerydb_id = isset($brewerydb_results -> id) ? "<p>" . $brewerydb_results -> id . "</p>" : " <br/>";; 
         $brewerydb_id_value = isset($brewerydb_results -> id) ? $brewerydb_results -> id : NULL; 
         $brewerydb_name = isset($brewerydb_results -> name) ? "<p>" . $brewerydb_results -> name . "</p>" : "0"; 
         $brewerydb_name_value = isset($brewerydb_results -> name) ? $brewerydb_results -> name : NULL; 
-        $brewerydb_description = isset($brewerydb_results -> description) ? "<p>" . $brewerydb_results -> description . "</p>" : "<br/>-<br/>"; 
-        $brewerydb_abv = isset($brewerydb_results -> abv) ? "<p>" . $brewerydb_results -> abv . "%</p>" : "-<br/>"; 
-        $brewerydb_style = isset($brewerydb_results -> style -> shortName) ? "<p>" . $brewerydb_results -> style -> shortName . "</p>" : "-<br/>"; 
-        $brewerydb_icon = isset($brewerydb_results -> labels -> icon) ? "<p><img src='". $brewerydb_results -> labels -> medium ."'/></p>" : "-<br/>";
-        $brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? "<p>". $brewerydb_results -> breweries -> item -> name ."</p>" : "-<br/>";
-        $brewerydb_website = isset($brewerydb_results -> breweries -> item -> website) ? "<p><a href=". $brewerydb_results -> breweries -> item -> website .">".$brewerydb_results -> breweries -> item -> website."</a></p>" : "-<br/>";
+        $brewerydb_description = isset($brewerydb_results -> description) ? "<p>" . $brewerydb_results -> description . "</p>" : "<br/>"; 
+        $brewerydb_abv = isset($brewerydb_results -> abv) ? "<p>" . $brewerydb_results -> abv . "%</p>" : "<br/>"; 
+        $brewerydb_style = isset($brewerydb_results -> style -> shortName) ? "<p>" . $brewerydb_results -> style -> shortName . "</p>" : "<br/>"; 
+        $brewerydb_icon = isset($brewerydb_results -> labels -> icon) ? "<p><img src='". $brewerydb_results -> labels -> medium ."'/></p>" : "<br/>";
+        $brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? "<p>". $brewerydb_results -> breweries -> item -> name ."</p>" : "<br/>";
+        $brewerydb_website = isset($brewerydb_results -> breweries -> item -> website) ? "<p><a href=". $brewerydb_results -> breweries -> item -> website .">".$brewerydb_results -> breweries -> item -> website."</a></p>" : "<br/>";
 // display the variables
         echo $brewerydb_name;
         echo $brewerydb_description;
@@ -79,6 +79,7 @@ echo '<p> If this isn\'t the beer you\'re looking for, try searching again. </p>
 
 function addBeer()
 {
+     include(dirname(__DIR__).'/account/core/init_profile.php'); 
     // Connection
 include(dirname(__DIR__).'/core/init_connect.php');
 
@@ -87,8 +88,8 @@ $barID = $_GET['brid'];
 $brewerydb_id_value = $_GET['beid'];
 $brewerydb_name_value = $_GET['ben'];
     
-    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerName,BeerID, BarID, Date) 
-    VALUES ('$brewerydb_name_value','$brewerydb_id_value', '$barID', CURDATE())";
+    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerName,BeerID, BarID, AccountID, Date) 
+    VALUES ('$brewerydb_name_value','$brewerydb_id_value', '$barID', '$accountID' ,CURDATE())";
     $retval_barbeer = mysqli_query($connection ,$sql_barbeer ) or die('Could not insert bar beer information; ' . mysqli_error($connection));;
     if(! $retval_barbeer )
     {

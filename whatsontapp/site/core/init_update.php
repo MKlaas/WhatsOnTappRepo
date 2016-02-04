@@ -1,16 +1,17 @@
 <?php
+
 updateBeer();
 function updateBeer()
 {
+    include(dirname(__DIR__).'/account/core/init_profile.php'); 
     // connect
     include(dirname(__DIR__).'/core/init_connect.php');
     // get beer and bar id from url
-
     $beerID = $_GET["beid"];
     $barID = $_GET["brid"];
     // set up query variable 
     $sql_barbeer_update = "UPDATE dbtablebarbeer
-                        SET Date = CONCAT(CURDATE(), ' ' , TIME(Date))
+                        SET Date = CONCAT(CURDATE(), ' ' , TIME(Date)), AccountID = $accountID
                         WHERE beerID = '$beerID' AND barID = $barID ";
     
     // do query
