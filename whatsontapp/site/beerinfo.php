@@ -4,11 +4,12 @@ $beerID = $_GET['id'];
 // get add value if posted run add beer function and redirect
 
             // this is the whatsontapp3 key a4fd41003198b446f6ee46d9ea309a21
+            // other key 6dab466c8f0979f11e35908c1b6671ff
         $name=$_POST['name'];
         $api_key = "a4fd41003198b446f6ee46d9ea309a21";
 
         // brewerydb api
-        $brewerydb_api_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries&key=6dab466c8f0979f11e35908c1b6671ff&format=xml";
+        $brewerydb_api_url = "http://api.brewerydb.com/v2/beers?ids=".$beerID."&withBreweries&key=".$api_key."&format=xml";
 
         $api_url=simplexml_load_file($brewerydb_api_url);
         $brewerydb_results = $api_url-> data -> item;

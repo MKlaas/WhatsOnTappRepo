@@ -5,7 +5,7 @@
 {
     $barID = $_GET['brid'];
     addBeer();
-    echo "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},3000);</script>";
+    echo "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},2000);</script>";
     echo "</head>";
     
 }
@@ -21,6 +21,7 @@ else
          else
         {
             // this is the whatsontapp3 key a4fd41003198b446f6ee46d9ea309a21
+            // the other key 6dab466c8f0979f11e35908c1b6671ff
         $name=$_POST['name'];
         $api_key = "a4fd41003198b446f6ee46d9ea309a21";
 
@@ -79,25 +80,46 @@ echo '<p> If this isn\'t the beer you\'re looking for, try searching again. </p>
 
 function addBeer()
 {
-     include(dirname(__DIR__).'/account/core/init_profile.php'); 
-    // Connection
-include(dirname(__DIR__).'/core/init_connect.php');
 
-// grabbing url variables for query insert
-$barID = $_GET['brid'];
-$brewerydb_id_value = $_GET['beid'];
-$brewerydb_name_value = $_GET['ben'];
-    
-    $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerName,BeerID, BarID, AccountID, Date) 
-    VALUES ('$brewerydb_name_value','$brewerydb_id_value', '$barID', '$accountID' ,CURDATE())";
-    $retval_barbeer = mysqli_query($connection ,$sql_barbeer ) or die('Could not insert bar beer information; ' . mysqli_error($connection));;
-    if(! $retval_barbeer )
+    include(dirname(__DIR__).'/account/core/init_profile.php'); 
+        // Connection
+    include(dirname(__DIR__).'/core/init_connect.php');
+
+    // grabbing url variables for query insert
+    $barID = $_GET['brid'];
+    $brewerydb_id_value = $_GET['beid'];
+    $brewerydb_name_value = $_GET['ben'];
+    $sql_action="SELECT Action FROM dbtableuser WHERE AccountID = $accountID";
+    $sql_action_result = mysqli_query( $connection,$sql_action) or die('Could not get action information; ' . mysqli_error($connection));
+
+    //-create  while loop and loop through result set
+    while($row=mysqli_fetch_array($sql_action_result))
     {
-        die('Could not enter data: ' . mysqli_error());
+            $action=$row['Action'];
+    }
+    if ($action >= 5)
+    {
+         echo "<script>setTimeout(function(){window.location.href='barpage.php?id=".$barID."'},2000);</script>";
+         echo "Sorry, You've hit your daily quota for adding and updating the bar info, check back in 24 hours!";
     } 
-    else
+    else 
     {
-        echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='barpage.php?id=".$barID."'>bar</a>";
+
+        $sql_barbeer = "INSERT INTO dbtablebarbeer (BeerName,BeerID, BarID, AccountID, Date) 
+        VALUES ('$brewerydb_name_value','$brewerydb_id_value', '$barID', '$accountID' ,CURDATE())";
+        $retval_barbeer = mysqli_query($connection ,$sql_barbeer ) or die('Could not insert bar beer information; ' . mysqli_error($connection));
+        $sql_useraction = "UPDATE dbtableuser 
+                            SET Action = Action + 1
+                            WHERE AccountID = $accountID";
+        $retval_useraction = mysqli_query($connection ,$sql_useraction ) or die('Could not insert user information; ' . mysqli_error($connection));
+        if(! $retval_barbeer && ! $retval_useraction)
+        {
+            die('Could not enter data: ' . mysqli_error());
+        } 
+        else
+        {
+            echo "Thanks for the heads up! you'll be back at the bar in just a few seconds.... <br/><br/> If not take the following link back to the <a href='barpage.php?id=".$barID."'>bar</a>";
+        }
     }
     mysqli_close($connection);
     
