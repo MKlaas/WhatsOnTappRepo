@@ -28,17 +28,7 @@ $rows = mysqli_num_rows($barbeerresult);
         $datediff = $now - $dbDate;
         $dayscount = floor($datediff/(60*60*24));
 
-        if($dayscount >= 120)
-        {
-            $barbeerdeletequery="DELETE FROM dbtablebarbeer
-                WHERE Date < (CURDATE() - INTERVAL 180 DAY)";
-
-            mysqli_query($connection, $barbeerdeletequery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
-             
-            // way past current ,delete the barbeer entry
-            $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
-        }
-        elseif($dayscount >= 90)
+        if($dayscount >= 90)
         {
             // way past currentdelete the barbeer entry
             $lastseen = " seen <font style='color:red;'>".$dayscount."</font> days ago by <font style='color:#337ab7'>".$userName."</font>"; 
