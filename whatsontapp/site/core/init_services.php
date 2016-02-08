@@ -2,11 +2,9 @@
 error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
-$posted = FALSE;
 if ($_POST['address_submit_button']) {
 
     $address = $_POST['address'];
-    $posted = TRUE;
 
 }
 

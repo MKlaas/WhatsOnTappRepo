@@ -46,8 +46,8 @@ if(!isset($_SESSION['login_user'])){
     include('core/init_connect.php');
     // for the bars table
     $delete_barquery="DELETE FROM dbtablebar WHERE BarID = '$barID' LIMIT 1";
-    $delete_barresult=mysqli_query($connection, $delete_barquery) or die('Could not remove bar information ' . mysqli_error($connection));
-    echo "<p style='color:red; text-align:center;'>Sorry we are having trouble loading info for ".$barName." at ".$barAddress." , " . $barZipCode .".<br/> Please check the information and try to add it again. If you're positive this is the info, <a href=''> contact us </a> to let us know! </p>";
+    $delete_barresult=mysqli_query($connection, $delete_barquery) or die('Could not remove bar information ' . mysqli_error($connection)); 
+    echo "<p style='color:red; text-align:center;'>Sorry we are having trouble loading info for ".$barName." at ".$barAddress." , " . $barZipCode .".<br/> Please check the information and try to add it again. If you're positive this is the info, <a href='mailto:whatsontapp3@gmail.com'>Contact Us</a> to let us know! </p>";
     echo "<script> /*";
 } ?> 
       <!-- Page Content -->

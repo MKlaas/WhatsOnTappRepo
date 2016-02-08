@@ -158,7 +158,7 @@ if(!isset($_SESSION['login_user'])){
                     <p>Would you like to give feed back on What's on Tapp? We would love to hear from you!</p>
                 </div>
                 <div class="col-md-4">
-                    <a class="btn btn-lg btn-default btn-block" href="#">Coming Soon</a>
+                    <a class="btn btn-lg btn-default btn-block" href="mailto:whatsontapp3@gmail.com">Contact Us</a>
                 </div>
             </div>
         </div>

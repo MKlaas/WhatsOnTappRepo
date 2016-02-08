@@ -72,7 +72,7 @@ include('includes/navbar.php');
 	
 
 
-<form method="post" action="<?php echo $_SERVER["PHP_SELF"] . '?'.http_build_query($_GET); ?>"> <!-- notice the updated action -->
+<form method="post" action="<?php echo $_SERVER["PHP_SELF"] . "?".http_build_query($_GET); ?>"> <!-- notice the updated action -->
 <input  type="text" name="address">
  <input  type="submit" name="address_submit_button" value="Search Bars By Zipcode ">
 </form>

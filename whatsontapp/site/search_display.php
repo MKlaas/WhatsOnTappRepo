@@ -47,10 +47,22 @@ $error=''; // Variable To Store Error Message
 if (isset($_POST['submit'])) {
 if (empty($_POST['name'])) {
 $error = "Please enter name or style";
+echo  '   <p>You  may search name or type</p>
+    <form  method="post" action="search_display.php?go"  id="searchform">
+      <input  type="text" name="name">
+      <input  type="submit" name="submit" value="Search Beers">
+    </form>';
+
 }
 
 
 $name=$_POST['name'];
+
+echo  '   <p>You  may search name or type</p>
+    <form  method="post" action="search_display.php?go"  id="searchform">
+      <input  type="text" name="name">
+      <input  type="submit" name="submit" value="Search Beers">
+    </form>';
 
 // load api url into xml reader
 $api_key = "a4fd41003198b446f6ee46d9ea309a21";
