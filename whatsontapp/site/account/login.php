@@ -47,7 +47,6 @@ if(isset($_SESSION['login_user']))
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
                             <h1><strong>What's on Tapp!</strong></h1>
-                            (A Work In Progress!)
                             <div class="description">
                             </div>
                         </div>

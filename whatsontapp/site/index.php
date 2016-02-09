@@ -93,9 +93,6 @@ if(!isset($_SESSION['login_user'])){
                 <h1 class="page-header">
                     Welcome to "What's on Tapp!"
                 </h1>
-                <p>What's on tap is currently a work in progress! <br/>
-                    What's on tap is designed to be your easy access window to the bar world. As a user you may add bars and beers in your area so that other users may know! <br/>Future things to come: Adding your own reviews to both the beer and bar, seeing top rated beers in your area, seeing most visited bar in your area, seeing trending beers. Bar owners acting as admin for their bar page and keeping up to date.
-                    </p>
 				<h2>
 				Trending Beers In Your Area!
 				</h2>

@@ -4,9 +4,10 @@ error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery="SELECT a.BeerID, a.Date, b.UserName 
+$barbeerquery="SELECT a.BeerID, a.Date, a.Vote ,b.UserName 
 FROM dbtablebarbeer a, dbtableuser b
-WHERE a.BarID= $barID AND a.AccountID = b.AccountID";
+WHERE a.BarID= $barID AND a.AccountID = b.AccountID
+ORDER BY a.Vote DESC";
 
 $barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
 $rows = mysqli_num_rows($barbeerresult);
@@ -19,11 +20,12 @@ $rows = mysqli_num_rows($barbeerresult);
      */
 //$barName=array();
   //-create  while loop and loop through result set
-  $api_key = "a4fd41003198b446f6ee46d9ea309a21";
+  $api_key = "6dab466c8f0979f11e35908c1b6671ff";
   while($row=mysqli_fetch_array($barbeerresult)){
         $userName = $row['UserName'];
         $beerID = $row['BeerID'];
         $dbDate = strtotime($row['Date']);
+        $votes = $row['Vote'];
         $now = time(); // or your date as well
         $datediff = $now - $dbDate;
         $dayscount = floor($datediff/(60*60*24));
@@ -64,7 +66,7 @@ $rows = mysqli_num_rows($barbeerresult);
         $brewerydb_style = isset($brewerydb_results -> style -> shortName) ? $brewerydb_results -> style -> shortName : "-";
         $brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? $brewerydb_results -> breweries -> item -> name : "-";
         echo "<ul style='list-style-type:none;'>";
-        echo "<li><font color='#377BB5'><a href=\"beerpage.php?id=$beerID\">" .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv ." %</a></font>".$lastseen."<a href=\"update.php?beid=$beerID&brid=$barID\"><i style='margin-left:25px;' class='fa fa-check-square'></i></a></li>\n";
+        echo "<li> ".$votes." <font color='#377BB5'><a href=\"beerpage.php?id=$beerID\">" .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv ." %</a></font>".$lastseen."<a href=\"update.php?beid=$beerID&brid=$barID\"><i style='margin-left:25px;' class='fa fa-check-square'></i></a></li>\n";
         echo "</ul>";
   }
   

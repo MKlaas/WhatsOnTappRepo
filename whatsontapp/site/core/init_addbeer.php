@@ -38,7 +38,7 @@ else
                     <input  type="submit" name="submit" value="Search Beers">
                     </form>
                     <br/>';
-        $api_key = "a4fd41003198b446f6ee46d9ea309a21";
+        $api_key = "6dab466c8f0979f11e35908c1b6671ff";
 
         // brewerydb api
         $brewerydb_api_url = "https://api.brewerydb.com/v2/search?type=beer&withBreweries=y&q=".$name."&p=1&key=".$api_key."&format=xml";

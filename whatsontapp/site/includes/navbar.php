@@ -15,7 +15,7 @@ include('./account/core/init_profile.php');
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php" >What's on Tapp (A Work In Progress)</a>
+                <a class="navbar-brand" href="index.php" >What's on Tapp</a>
 				<p style="float:right;margin-left:350px;margin-top:12px;text-transform:uppercase;font-weight:bold;font-family:courier new;color:lightblue;"><i>Welcome, <?php echo $login_session; ?>!</i></p>
             </div>
 					

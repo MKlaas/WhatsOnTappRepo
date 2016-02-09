@@ -40,7 +40,7 @@ $barName=array();
 	  // select the index from a.name,
           $barName[]=$row[0];
   }
-$api_key = "a4fd41003198b446f6ee46d9ea309a21";
+$api_key = "6dab466c8f0979f11e35908c1b6671ff";
 // brewerydb api search by id
 $brewerydb_api_url = "https://api.brewerydb.com/v2/beers?ids=".$beerID."&key=".$api_key."&format=xml";
 $api_url=simplexml_load_file($brewerydb_api_url);

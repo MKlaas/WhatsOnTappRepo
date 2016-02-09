@@ -16,7 +16,7 @@ $barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look u
 $rows = mysqli_num_rows($barbeerresult);
   
   //-create  while loop and loop through result set
-  $api_key = "a4fd41003198b446f6ee46d9ea309a21";
+  $api_key = "6dab466c8f0979f11e35908c1b6671ff";
  if (mysqli_num_rows($barbeerresult)<=0) 
  {  
      echo "Can't seem to find any trending beers in your area. Get a trend starting by adding some beers you see at your favorite bar!";
