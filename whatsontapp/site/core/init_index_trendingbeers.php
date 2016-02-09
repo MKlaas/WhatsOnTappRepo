@@ -38,7 +38,11 @@ $rows = mysqli_num_rows($barbeerresult);
         //$brewerydb_abv = isset($brewerydb_results -> abv) ? $brewerydb_results -> abv : "-";
         //$brewerydb_style = isset($brewerydb_results -> style -> shortName) ? $brewerydb_results -> style -> shortName : "-";
         //$brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? $brewerydb_results -> breweries -> item -> name : "-";
-        $brewerydb_icon = isset($brewerydb_results -> labels -> icon) ? "<p><img src='". $brewerydb_results -> labels -> medium ."'/></p>" : "-<br/>";
+        
+        $brewerydb_icon = isset($brewerydb_results -> labels -> icon) ? "<p><img src='". $brewerydb_results -> labels -> medium ."'/></p>" : '<span class="fa-stack fa-5x">
+					  <i class="fa fa-beer fa-stack-2x text-primary"></i>
+					  <i class="fa fa-beer fa-stack-1x fa-inverse"></i>
+                    </span> <br/><br/><br/><br/><br/><br/><br/>';
         echo '<div class="col-md-4">
                   <div class="panel panel-default">
                    ';
