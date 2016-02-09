@@ -2,12 +2,13 @@
 error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
-
+// get zip array
+include(dirname(__DIR__).'/core/init_getuserzip.php');
 // Connection
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1].$address[2]."%' ORDER BY clicked DESC LIMIT 6";
+$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode IN ('".$nearbyZipcodesArray."') ORDER BY clicked DESC LIMIT 6";
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
 
@@ -28,7 +29,6 @@ echo '<div class="row"> ';
 // go through xml file 
 foreach ($xml ->result as $result)
 {
-    
     if(count(in_array($result->name, $barName)) <= 0)
     {
         
@@ -42,7 +42,8 @@ foreach ($xml ->result as $result)
         $barNameValue = mysqli_real_escape_string($connection, $result->name);
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
-            WHERE Name= '$barNameValue'";
+            WHERE Name= '$barNameValue'
+            AND zipcode IN ('".$nearbyZipcodesArray."')";
         $barIDResult = mysqli_query( $connection,$barIDQuery) or die('Could not get bar information; ' . mysqli_error($connection)); 
         $barIDRows = mysqli_num_rows($barIDResult);
         

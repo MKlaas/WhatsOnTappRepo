@@ -52,7 +52,7 @@
                 </div>
                 <div class="register span6" style="margin-right: 80px; margin-left: 250px;">
                     <form action="" method="post">
-                        <h2>REGISTER for <span class="red"><strong>Tapp</strong></span></h2>
+                        <h2>UPDATE for <span class="red"><strong>Tapp</strong></span></h2>
                         <label for="email">Email</label>
                         <input type="text" id="" name="email" placeholder="enter your email...">
                         <label for="zipcode">Zip code</label>

@@ -2,12 +2,15 @@
 error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
+
 if ($_POST['address_submit_button']) {
 
     $address = $_POST['address'];
 
 }
 
+// get nearby zip array
+include(dirname(__DIR__).'/core/init_getuserzip.php');
 echo '<iframe 
 	  width="700"
 	  height="450"
@@ -23,7 +26,9 @@ echo "<h4>Bars Within <strong> " . $address ." </strong></h4>";
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%' OR Name LIKE '%".$address."%'";
+$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode IN ('".$nearbyZipcodesArray."') OR Name LIKE '%".$address."%'";
+// think this is screwing me up
+//$sqlquery="SELECT Name FROM dbtablebar WHERE ZipCode LIKE '".$address[0].$address[1]."%' OR Name LIKE '%".$address."%'";
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
 

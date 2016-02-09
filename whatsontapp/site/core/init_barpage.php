@@ -39,6 +39,8 @@ $rows = mysqli_num_rows($barresult);
           $barCountry=$row['Country'];
   }
 
+// use this to say if it was found in the first second or third page and prevent from going to next page.
+$found = 0;
 // google places api
 $map_url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 
@@ -48,7 +50,7 @@ foreach ($mapsearch_url ->result as $result)
     // if its in our database, list it
     if($result->name == $barName)  
     { 
-        
+        $found = 1;
         $loaded = true;
         $placeID = $result->place_id;        
         //$photo=$result->photo;
@@ -66,66 +68,75 @@ foreach ($mapsearch_url ->result as $result)
     
 }
 
-if($nextPage1 != "0")
+// if it was not found in previous page
+if ($found != 1)
 {
-    // due to the nature of google api calls, you must sleep for a couple seconds before calling again
-    sleep(2);
-    $map_url_page1 = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&pagetoken=". $nextPage1 ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-
-    $mapsearch_url_page1=simplexml_load_file($map_url_page1);
-    foreach ($mapsearch_url_page1 ->result as $result1)
-    {
-        // if its in our database, list it
-        if($result1->name == $barName)  
-        { 
-            $loaded = true;
-            $placeID = $result1->place_id;        
-            //$photo=$result1->photo;
-            $photo_reference = $result1->photo[0]->photo_reference;
-            $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-            $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
-                '
-                <div style="width:575px; height=:375px;">
-                <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
-                </div>
-                '; break;
-        }
         
-        $nextPage2 = isset($mapsearch_url_page1 -> next_page_token) ? $mapsearch_url_page1 -> next_page_token : "0" ;
-       // echo $nextPage2;
-    
-    }
-}
-
-if($nextPage2 != "0")
-{
-    sleep(2);
-    $map_url_page2 = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&pagetoken=". $nextPage2 ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-
-    $mapsearch_url_page2=simplexml_load_file($map_url_page2);
-    foreach ($mapsearch_url_page2 ->result as $result)
+    if($nextPage1 != "0")
     {
-        // if its in our database, list it
-        if($result->name == $barName)  
-        { 
-            $loaded = true;
-            $placeID = $result->place_id;        
-            //$photo=$result->photo;
-            $photo_reference = $result->photo[0]->photo_reference;
-            $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
-            $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
-                '
-                <div style="width:575px; height=:375px;">
-                <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
-                </div>
-                '; break;
+        // due to the nature of google api calls, you must sleep for a couple seconds before calling again
+        sleep(2);
+        $map_url_page1 = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&pagetoken=". $nextPage1 ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+
+        $mapsearch_url_page1=simplexml_load_file($map_url_page1);
+        foreach ($mapsearch_url_page1 ->result as $result1)
+        {
+            // if its in our database, list it
+            if($result1->name == $barName)  
+            { 
+                $found = 1;
+                $loaded = true;
+                $placeID = $result1->place_id;        
+                //$photo=$result1->photo;
+                $photo_reference = $result1->photo[0]->photo_reference;
+                $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+                $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
+                    '
+                    <div style="width:575px; height=:375px;">
+                    <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
+                    </div>
+                    '; break;
+            }
+            
+            $nextPage2 = isset($mapsearch_url_page1 -> next_page_token) ? $mapsearch_url_page1 -> next_page_token : "0" ;
+        // echo $nextPage2;
+        
         }
-        // shouldnt be another next page, 2 is max according to google api docs
-       // $nextPage2 = isset($mapsearch_url -> next_page_token) ? $mapsearch_url -> next_page_token : "0" ;
-    
     }
 }
 
+// if it was not found in previous page
+if ($found != 1)
+{
+    if($nextPage2 != "0")
+    {
+        sleep(2);
+        $map_url_page2 = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=bars+in+". $barZipCode ."&pagetoken=". $nextPage2 ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+
+        $mapsearch_url_page2=simplexml_load_file($map_url_page2);
+        foreach ($mapsearch_url_page2 ->result as $result)
+        {
+            // if its in our database, list it
+            if($result->name == $barName)  
+            { 
+                $loaded = true;
+                $placeID = $result->place_id;        
+                //$photo=$result->photo;
+                $photo_reference = $result->photo[0]->photo_reference;
+                $image= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=550&maxheight=350&photoreference=". $photo_reference ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
+                $detailsImage = isset($photo_reference) ? $details_result->website.'<image width="550" height="350" src="'. $image .'"</image>' : 
+                    '
+                    <div style="width:575px; height=:375px;">
+                    <i style="font-size:360px;" class="fa fa-home fa-stack-2x text-primary"></i>
+                    </div>
+                    '; break;
+            }
+            // shouldnt be another next page, 2 is max according to google api docs
+        // $nextPage2 = isset($mapsearch_url -> next_page_token) ? $mapsearch_url -> next_page_token : "0" ;
+        
+        }
+    }
+}
 // google places detail api
 $map_details = "https://maps.googleapis.com/maps/api/place/details/xml?placeid=". $placeID ."&key=AIzaSyCDAZ5pbAv6PUHU1k-_IoGHow-JQVrRBDw";
 

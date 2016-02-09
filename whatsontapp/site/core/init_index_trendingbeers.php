@@ -1,16 +1,22 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/account/core/init_profile.php'); 
+$address = $zip;
+// get nearby zip array
+include(dirname(__DIR__).'/core/init_getuserzip.php');
 // connection
 include(dirname(__DIR__).'/core/init_connect.php');
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery='SELECT a.BeerID , COUNT(a.BeerID) AS count 
+$barbeerquery="SELECT a.BeerID , COUNT(a.BeerID) AS count 
 FROM dbtablebarbeer a, dbtablebar b
-WHERE a.BarID = b.BarID AND b.ZipCode LIKE "'.$zip[0].$zip[1].'%"
+WHERE a.BarID = b.BarID AND b.ZipCode IN ('".$nearbyZipcodesArray."')
 GROUP BY BeerID 
 ORDER BY count DESC
 LIMIT 3
-';
+";
+
+
+
 
 $barbeerresult=mysqli_query($connection, $barbeerquery) or die('Could not look up barbeer information; ' . mysqli_error($connection));
 $rows = mysqli_num_rows($barbeerresult);

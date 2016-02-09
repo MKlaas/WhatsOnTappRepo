@@ -1,14 +1,15 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
-include(dirname(__DIR__).'/account/core/init_profile.php');
-
+include(dirname(__DIR__).'/account/core/init_profile.php'); 
 $address = $zip;
+
 if ($_POST['address_submit_button']) {
 
     $address = $_POST['address'];
 
 }
-
+// get nearby zip array
+include(dirname(__DIR__).'/core/init_getuserzip.php');
 echo '<iframe 
 	  width="700"
 	  height="450"
@@ -27,7 +28,8 @@ include(dirname(__DIR__).'/core/init_connect.php');
 $sqlquery="SELECT a.name,a.address,a.city,a.zipcode
 FROM dbtablebar a, dbtablebarbeer b 
 WHERE a.BarID=b.BarID 
-AND b.BeerID = '$beerID'";
+AND b.BeerID = '$beerID'
+AND ZipCode IN ('".$nearbyZipcodesArray."')";
 
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not get bar, beer information; ' . mysqli_error($connection));
@@ -63,7 +65,8 @@ foreach ($xml ->result as $result)
         $barNameValue = mysqli_real_escape_string($connection, $result->name);
         $barIDQuery="SELECT BarID 
             FROM dbtablebar
-            WHERE Name= '$barNameValue'";
+            WHERE Name= '$barNameValue'
+            AND ZipCode IN ('".$nearbyZipcodesArray."')";
         $barIDResult = mysqli_query( $connection,$barIDQuery) or die('Could not get bar information; ' . mysqli_error($connection)); 
         $barIDRows = mysqli_num_rows($barIDResult);
         

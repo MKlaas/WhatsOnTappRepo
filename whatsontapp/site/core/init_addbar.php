@@ -21,8 +21,8 @@ $country = mysqli_real_escape_string($connection, $searchTextFieldArray[4]);
 $zipcode = mysqli_real_escape_string($connection, $zipTextField);
 
 
-$sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country, zipcode) 
-VALUES ('$name', '$address', '$city', '".$state[1].$state[2]."', '$country', '$zipcode')";
+$sql_bar = "INSERT INTO dbtablebar (name, address, city, state, country, zipcode, clicked) 
+VALUES ('$name', '$address', '$city', '".$state[1].$state[2]."', '$country', '$zipcode','1')";
 $retval_bar = mysqli_query( $connection, $sql_bar ) or die('Could not insert bar information; ' . mysqli_error($connection));;
 global $barID;
 $barID = mysqli_insert_id($connection);
