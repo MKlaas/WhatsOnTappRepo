@@ -8,7 +8,7 @@ include(dirname(__DIR__).'/core/init_getuserzip.php');
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode IN ('".$nearbyZipcodesArray."') ORDER BY clicked DESC LIMIT 6";
+$sqlquery="SELECT Name, clicked FROM dbtablebar WHERE ZipCode IN ('".$nearbyZipcodesArray."') ORDER BY clicked DESC LIMIT 3";
 
 $sqlresult = mysqli_query( $connection,$sqlquery) or die('Could not look up bar information; ' . mysqli_error($connection));
 
@@ -83,3 +83,5 @@ echo '</div>';
 
 mysqli_close($connection); // Closing Connection
   ?>
+  
+  

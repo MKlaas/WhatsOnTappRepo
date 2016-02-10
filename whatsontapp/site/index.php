@@ -93,57 +93,22 @@ if(!isset($_SESSION['login_user'])){
                 <h1 class="page-header">
                     Welcome to "What's on Tapp!"
                 </h1>
-				<h2>
-				Trending Beers In Your Area!
-				</h2>
+                <h2 class="page-header">Bars Trending In Your Area!</h2>
+                 <?php include('core/init_index_trendingbars.php'); ?>
+
 
             </div>
-            <?php include('core/init_index_trendingbeers.php'); ?>
+         
             
-            <!-- <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-check"></i> Coming Soon</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>This will soon be one of the best beers you will have ever tasted!</p>
-                        <a href="#" class="btn btn-default">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-gift"></i> Coming Soon</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>This will soon be one of the best beers you will have ever tasted!</p>
-                        <a href="#" class="btn btn-default">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-compass"></i> Coming Soon</h4>
-                    </div>
-                    <div class="panel-body">
-                        <p>This will soon be one of the best beers you will have ever tasted!</p>
-                        <a href="#" class="btn btn-default">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-        <!-- /.row -->
 
-        <!-- Portfolio Section -->
         
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Bars Trending In Your Area!</h2>
+                <h2>Top Beers In Your State!</h2>
             </div>
-            <?php include('core/init_index_trendingbars.php'); ?>
+              <?php include('core/init_index_trendingbeers.php'); ?>
+            
+            
         </div>
         <!-- /.row -->
         <hr>

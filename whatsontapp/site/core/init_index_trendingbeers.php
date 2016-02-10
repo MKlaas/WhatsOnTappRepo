@@ -7,12 +7,11 @@ include(dirname(__DIR__).'/core/init_getuserzip.php');
 // connection
 include(dirname(__DIR__).'/core/init_connect.php');
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery="SELECT a.BeerID , COUNT(a.BeerID) AS count 
-FROM dbtablebarbeer a, dbtablebar b
-WHERE a.BarID = b.BarID AND b.ZipCode IN ('".$nearbyZipcodesArray."')
-GROUP BY BeerID 
-ORDER BY count DESC
-LIMIT 3
+$barbeerquery="SELECT BeerName, BeerID, SUM(Vote) AS Total 
+FROM dbtablebarbeer a INNER JOIN dbtablebar b ON b.BarID = a.BarID AND b.ZipCode LIKE '".$address[0].$address[1]."%' 
+GROUP BY a.BeerName,a.BeerID
+ORDER BY Total Desc
+LIMIT 6
 ";
 
 
