@@ -4,7 +4,7 @@ error_reporting(E_ERROR | E_PARSE);
 include(dirname(__DIR__).'/core/init_connect.php');
 
 // SQL query to fetch information of beer types and finds matches.
-$barbeerquery="SELECT a.BeerID, a.Date, a.Vote ,b.UserName 
+$barbeerquery="SELECT a.ID ,a.BeerID, a.Date, a.Vote ,b.UserName 
 FROM dbtablebarbeer a, dbtableuser b
 WHERE a.BarID= $barID AND a.AccountID = b.AccountID
 ORDER BY a.Vote DESC";
@@ -22,6 +22,7 @@ $rows = mysqli_num_rows($barbeerresult);
   //-create  while loop and loop through result set
   $api_key = "6dab466c8f0979f11e35908c1b6671ff";
   while($row=mysqli_fetch_array($barbeerresult)){
+        $id = $row['ID'];
         $userName = $row['UserName'];
         $beerID = $row['BeerID'];
         $dbDate = strtotime($row['Date']);
@@ -65,10 +66,25 @@ $rows = mysqli_num_rows($barbeerresult);
         $brewerydb_abv = isset($brewerydb_results -> abv) ? $brewerydb_results -> abv : "-";
         $brewerydb_style = isset($brewerydb_results -> style -> shortName) ? $brewerydb_results -> style -> shortName : "-";
         $brewerydb_brewery = isset($brewerydb_results -> breweries -> item -> name) ? $brewerydb_results -> breweries -> item -> name : "-";
-        echo "<ul style='list-style-type:none;'>";
-        echo "<li> ".$votes." <font color='#377BB5'><a href=\"beerpage.php?id=$beerID\">" .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv ." %</a></font>".$lastseen."<a href=\"update.php?beid=$beerID&brid=$barID\"><i style='margin-left:25px;' class='fa fa-check-square'></i></a></li>\n";
-        echo "</ul>";
+        echo '<div class="item" data-postid="'. $id .'" data-score="'. $votes .'">
+			<div class="vote-span"><!-- voting-->
+				<div class="vote" data-action="up" title="Vote up">
+					<i class="icon-chevron-up"></i>
+				</div><!--vote up-->
+				<div class="vote-score">'.$votes .'</div>
+				<div class="vote" data-action="down" title="Vote down">
+					<i class="icon-chevron-down"></i>
+				</div><!--vote down-->
+			</div>
+
+			<div class="post"><!-- post data -->
+			<font color="#377BB5"><a href=\"beerpage.php?id=$beerID\">' .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv .' %</a></font>'.$lastseen.'<a href=\"update.php?beid=$beerID&brid=$barID\"><i style="margin-left:25px;" class="fa fa-check-square"></i></a>
+			</div>
+		</div><!--item-->';
+          		
   }
+  
+
   
 $beerTextField = $_POST['beerTextField'];
 $beerName= mysqli_real_escape_string($connection, $beerTextField);
