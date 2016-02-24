@@ -93,6 +93,7 @@ if(!isset($_SESSION['login_user'])){
                 <h1 class="page-header">
                     Welcome to "What's on Tapp!"
                 </h1>
+                <p>Welcome to What's on Tapp! A site dedicated to showing what bars have what beers! As a user feel free to find your favorite bar and add the different beers they have so that others may see. On the home page you can see bars and beers trending in your area. If there are none, get your area started! Are you looking for a certain beer? Go to the services page and search for a beer, change the zip code to check different locations! Looking for a specific bar? Try searching the area via zip code, or by bar name. If the bar is highlighted blue then someone has been there before, go check it out! Otherwise feel free to add it and let other users know Whats on Tapp!</p>
                 <h2 class="page-header">Bars Trending In Your Area!</h2>
                  <?php include('core/init_index_trendingbars.php'); ?>
 
