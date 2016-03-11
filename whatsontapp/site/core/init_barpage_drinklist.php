@@ -78,7 +78,7 @@ $rows = mysqli_num_rows($barbeerresult);
 			</div>
 
 			<div class="post"><!-- post data -->
-			<font color="#377BB5"><a href="beerpage.php?id='.$beerID.'">' .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv .' %</a></font>'.$lastseen.'<a href=\"update.php?beid=$beerID&brid=$barID\"><i style="margin-left:25px;" class="fa fa-check-square"></i></a>
+			<font color="#377BB5"><a href="beerpage.php?id='.$beerID.'">' .$brewerydb_name. " - ". $brewerydb_style ." - ". $brewerydb_brewery ." - ". $brewerydb_abv .' %</a></font>'.$lastseen.'<a href="update.php?beid='.$beerID.'&brid='.$barID.'"><i style="margin-left:25px;" class="fa fa-check-square"></i></a>
 			</div>
 		</div><!--item-->';
           		
